@@ -1,7 +1,11 @@
+import org.openqa.selenium.Cookie;
+import org.openqa.selenium.InvalidCookieDomainException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.LinkedList;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by popka on 21.03.15.
@@ -9,17 +13,17 @@ import java.util.LinkedList;
 public class BrowserPool {
 
     private final int nBrowsers;
-    private final PoolWorker[] threads;
+    private final BrowserWorker[] browsers;
     private final LinkedList queue;
 
     public BrowserPool(int nBrowsers) {
         this.nBrowsers = nBrowsers;
         queue = new LinkedList<BrowserRunnable>();
-        threads = new PoolWorker[nBrowsers];
+        browsers = new BrowserWorker[nBrowsers];
 
         for (int i=0; i<nBrowsers; i++) {
-            threads[i] = new PoolWorker(i);
-            threads[i].start();
+            browsers[i] = new BrowserWorker(i);
+            browsers[i].start();
         }
     }
 
@@ -30,14 +34,20 @@ public class BrowserPool {
         }
     }
 
-    private class PoolWorker extends Thread {
-        WebDriver webDriver;
+    private class BrowserWorker extends Thread {
+        private WebDriver webDriver;
         int number;
 
-        public PoolWorker(int number) {
+        public BrowserWorker(int number) {
             webDriver = new FirefoxDriver();
             this.number = number;
         }
+
+        public WebDriver getWebDriver() {
+            return webDriver;
+        }
+
+
 
         public void run() {
             BrowserRunnable r;
@@ -58,15 +68,30 @@ public class BrowserPool {
                 }
 
                 // If we don't catch RuntimeException,
-                // the pool could leak threads
+                // the pool could leak browsers
                 try {
                     r.run(webDriver);
-                    System.out.print(webDriver.getCurrentUrl() + " запущен из потока №" + this.number);
+                    System.out.println(webDriver.getCurrentUrl() + " запущен из потока №" + this.number);
                 }
                 catch (RuntimeException e) {
                     // LOG
                 }
             }
+        }
+    }
+
+    public void setCookie(String url, Set<Cookie> cookieSet) {
+        for (int i=0; i<nBrowsers; i++) {
+            browsers[i].getWebDriver().navigate().to(url);
+            browsers[i].getWebDriver().manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+            System.out.println(browsers[i].getWebDriver().getCurrentUrl());
+            for (Cookie cookie:cookieSet) {
+                try {
+                    browsers[i].getWebDriver().manage().addCookie(cookie);
+                } catch (InvalidCookieDomainException e) {}
+            }
+            browsers[i].getWebDriver().navigate().refresh();
+
         }
     }
 }

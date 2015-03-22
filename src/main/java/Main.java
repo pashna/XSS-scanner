@@ -1,17 +1,25 @@
+
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 
 /**
  * Created by popka on 16.03.15.
  */
 public class Main {
+
+    static private String url = "https://mail.yandex.com";
+    static private int nBrowser = 4;
+
     public static void main(String[] args) {
-        BrowserPool browserPool = new BrowserPool(4);
-        String[] urls = {"yandex.ru", "mail.ru", "google.ru", "yahoo.com", "rambler.ru", "pikabu.ru", "wikipedia.ru",
-            "dps.ru", "gibdd.ru"};
-        for (int i=0; i<urls.length*4; i++) {
-            browserPool.execute(new Handler("http://www." + urls[i%urls.length]));
-        }
+
+        Engine engine = new Engine(url, nBrowser, 20);
+
     }
+
 }
