@@ -1,3 +1,5 @@
+import LinkContainer.LinkContainer;
+import Tasks.BrowserRunnable;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.InvalidCookieDomainException;
 import org.openqa.selenium.WebDriver;
@@ -34,6 +36,7 @@ public class BrowserPool {
         }
     }
 
+
     private class BrowserWorker extends Thread {
         private WebDriver webDriver;
         int number;
@@ -47,21 +50,16 @@ public class BrowserPool {
             return webDriver;
         }
 
-
-
         public void run() {
             BrowserRunnable r;
 
             while (true) {
                 synchronized(queue) {
                     while (queue.isEmpty()) {
-                        try
-                        {
+                        try {
                             queue.wait();
                         }
-                        catch (InterruptedException ignored)
-                        {
-                        }
+                        catch (InterruptedException ignored) {}
                     }
 
                     r = (BrowserRunnable) queue.removeFirst();
@@ -82,16 +80,24 @@ public class BrowserPool {
 
     public void setCookie(String url, Set<Cookie> cookieSet) {
         for (int i=0; i<nBrowsers; i++) {
-            browsers[i].getWebDriver().navigate().to(url);
-            browsers[i].getWebDriver().manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+            browsers[i].getWebDriver().navigate().to(url); // Проходим по ургу
+            browsers[i].getWebDriver().manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS); // Ждем загрузки
             System.out.println(browsers[i].getWebDriver().getCurrentUrl());
             for (Cookie cookie:cookieSet) {
                 try {
-                    browsers[i].getWebDriver().manage().addCookie(cookie);
+                    browsers[i].getWebDriver().manage().addCookie(cookie); // Заполняем куки
                 } catch (InvalidCookieDomainException e) {}
             }
-            browsers[i].getWebDriver().navigate().refresh();
+            browsers[i].getWebDriver().navigate().refresh(); // Обновляем страничку
+            browsers[i].getWebDriver().manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS); // Ждем загрузки
 
+        }
+    }
+
+    public void openUrl(String url) {
+        for (int i=0; i<nBrowsers; i++) {
+            browsers[i].getWebDriver().navigate().to(url);
+            browsers[i].getWebDriver().manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS); // Ждем загрузки
         }
     }
 }

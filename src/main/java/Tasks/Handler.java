@@ -1,5 +1,6 @@
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+package Tasks;
+
+import Tasks.BrowserRunnable;
 
 /**
  * Created by popka on 21.03.15.

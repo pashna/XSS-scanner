@@ -1,3 +1,4 @@
+import LinkContainer.LinkContainer;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -7,15 +8,16 @@ import java.util.Set;
 /**
  * Created by popka on 22.03.15.
  */
-public class Engine {
+public class Engine implements LinkContainer.LinkContainerCallback {
     private BrowserPool browserPool;
     private int nBrowser;
-    private String url;
-
+    private String url = "";
+    private LinkContainer linkContainer;
 
     public Engine(String url, int nBrowser) {
         this.url = url;
         browserPool = new BrowserPool(nBrowser);
+        browserPool.openUrl(url);
     }
 
     public Engine(String url, int nBrowser, int sec) {
@@ -42,7 +44,16 @@ public class Engine {
         browserPool.setCookie(url, cookieSet);
     }
 
-    public void open() {
-
+    public void createMapOfSite(){
+        linkContainer = new LinkContainer(this);
+        linkContainer.add(url);
     }
+
+    @Override
+    public void onLinkAdded(String urlToAnalise) {
+        browserPool.execute(new LinkFinder(linkContainer, urlToAnalise, url));
+        System.out.println(linkContainer);
+        System.out.println("================");
+    }
+
 }
