@@ -1,4 +1,5 @@
 import LinkContainer.LinkContainer;
+import Tasks.Opener;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -17,7 +18,7 @@ public class Engine implements LinkContainer.LinkContainerCallback {
     public Engine(String url, int nBrowser) {
         this.url = url;
         browserPool = new BrowserPool(nBrowser);
-        browserPool.openUrl(url);
+        browserPool.execute(new Opener(url));
     }
 
     public Engine(String url, int nBrowser, int sec) {

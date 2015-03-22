@@ -5,10 +5,10 @@ import Tasks.BrowserRunnable;
 /**
  * Created by popka on 21.03.15.
  */
-public class Handler extends BrowserRunnable {
+public class Opener extends BrowserRunnable {
     private String url="";
 
-    public Handler(String url) {
+    public Opener(String url) {
         this.url = url;
     }
 
