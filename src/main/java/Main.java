@@ -15,13 +15,14 @@ import java.util.regex.Pattern;
  */
 public class Main {
 
-    static private String url = "http://obuv-umka.ru/";
-    static private int nBrowser = 4;
+    static private String url = "https://xss-game.appspot.com/level2/frame";
+    static private int nBrowser = 1;
 
     public static void main(String[] args) {
 
         Engine engine = new Engine(url, nBrowser);
-        engine.createMapOfSite();
+        //engine.createMapOfSite();
+        engine.prepareXSS(url);
 
     }
 

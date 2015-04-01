@@ -2,11 +2,9 @@ package Tasks;
 
 import LinkContainer.LinkContainer;
 
-import Tasks.BrowserRunnable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;

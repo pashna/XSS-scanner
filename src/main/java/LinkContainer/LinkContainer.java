@@ -1,11 +1,11 @@
 package LinkContainer;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 
 /**
  * Created by popka on 22.03.15.
  */
-public class LinkContainer extends HashSet<String> {
+public class LinkContainer extends LinkedHashSet<String> {
     LinkContainerCallback callback;
 
     public LinkContainer(LinkContainerCallback callback) {

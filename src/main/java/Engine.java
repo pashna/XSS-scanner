@@ -1,6 +1,7 @@
 import LinkContainer.LinkContainer;
 import Tasks.LinkFinder;
 import Tasks.Opener;
+import Tasks.XssAnalyser;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -54,16 +55,20 @@ public class Engine implements LinkContainer.LinkContainerCallback {
             @Override
             public void onTaskEnd() {
                 System.out.println("TASK WAS DONE");
+                System.out.println(linkContainer);
             }
         });
 
     }
 
+    public void prepareXSS(String url) {
+        browserPool.execute(new XssAnalyser(url));
+    }
+
     @Override
     public void onLinkAdded(String urlToAnalise) {
         browserPool.execute(new LinkFinder(linkContainer, urlToAnalise, url));
-        //System.out.println(linkContainer);
-        //System.out.println("================");
     }
+
 
 }
