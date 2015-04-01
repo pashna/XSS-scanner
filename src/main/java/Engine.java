@@ -1,4 +1,5 @@
 import LinkContainer.LinkContainer;
+import Tasks.LinkFinder;
 import Tasks.Opener;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
@@ -48,13 +49,21 @@ public class Engine implements LinkContainer.LinkContainerCallback {
     public void createMapOfSite(){
         linkContainer = new LinkContainer(this);
         linkContainer.add(url);
+
+        browserPool.setTasksEndListener(new BrowserPool.TasksEndListener() {
+            @Override
+            public void onTaskEnd() {
+                System.out.println("TASK WAS DONE");
+            }
+        });
+
     }
 
     @Override
     public void onLinkAdded(String urlToAnalise) {
         browserPool.execute(new LinkFinder(linkContainer, urlToAnalise, url));
-        System.out.println(linkContainer);
-        System.out.println("================");
+        //System.out.println(linkContainer);
+        //System.out.println("================");
     }
 
 }

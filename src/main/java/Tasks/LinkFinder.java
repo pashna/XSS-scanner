@@ -1,3 +1,5 @@
+package Tasks;
+
 import LinkContainer.LinkContainer;
 
 import Tasks.BrowserRunnable;
@@ -81,7 +83,7 @@ public class LinkFinder extends BrowserRunnable {
             Matcher m = ends.matcher(link);
             if (m.find()) {
                 String expansion = m.group(); // Получаем расширение, чтобы не скачавать файлы типа .doc и т.д.
-                if (!(expansion.equals(".htm")||expansion.equals(".html"))) {
+                if (!(expansion.equals(".htm")||expansion.equals(".html")||expansion.equals(".php"))) {
                     return false;
                 }
             }
