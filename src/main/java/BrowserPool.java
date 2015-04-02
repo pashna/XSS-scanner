@@ -96,6 +96,9 @@ public class BrowserPool {
         }
     }
 
+    /*
+    Всем воркерам поставить куки
+     */
     public void setCookie(String url, Set<Cookie> cookieSet) {
         for (int i=0; i<nBrowsers; i++) {
             browsers[i].getWebDriver().navigate().to(url); // Проходим по ургу

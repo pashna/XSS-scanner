@@ -28,7 +28,7 @@ public class XssPreparer extends BrowserRunnable {
     private final String FORM = "FORM";
 
     private final String TEXT_TO_REPLACE = "TEXT_TO_REPLACE";
-    private final String INPUT_VALUE = "999999999";
+    public static final String INPUT_VALUE = "999999999";
     private LinkContainer reflectXSSUrlContainer;
     private LinkContainer linkContainer;
 
@@ -88,6 +88,9 @@ public class XssPreparer extends BrowserRunnable {
                             reflectXSSUrlContainer.add(decodedUrl);
                         }
 
+                        /*
+                        Пока не оттестировано!
+                         */
                         decodedUrl = decodedUrl.substring(0, decodedUrl.indexOf("?")); // Обрезаем по аргументы и добавляем в карту сайта (вдруг там новые ссылки)
                         synchronized (linkContainer) {
                             linkContainer.add(decodedUrl);
@@ -130,10 +133,13 @@ public class XssPreparer extends BrowserRunnable {
             WebElement form = listForms.get(number);
             try {
                 form.submit();
-            } catch (WebDriverException exeption) {};
+            } catch (WebDriverException exception) {};
         }
     }
 
+    /*
+    Содержит ли данная страничка текст INPUT_VALUE
+     */
     private boolean isPageContainsInputValue() {
         String pageSource = getWebDriver().getPageSource();
         return pageSource.contains(INPUT_VALUE);

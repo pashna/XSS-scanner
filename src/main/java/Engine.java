@@ -1,6 +1,7 @@
 import LinkContainer.LinkContainer;
 import Tasks.LinkFinder;
 import Tasks.Opener;
+import Tasks.ReflectXssSearcher;
 import Tasks.XssPreparer;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
@@ -100,7 +101,7 @@ public class Engine {
         reflectXSSUrlContainer.setCallback(new LinkContainer.LinkContainerCallback() { // При добавлении ссылки в контейнер хранения урлов с параметрами для ReflectXSS
             @Override
             public void onLinkAdded(String url) {
-
+                browserPool.execute(new ReflectXssSearcher(url));
             }
         });
         for (String url:linkContainer)
