@@ -17,6 +17,13 @@ public class Engine implements LinkContainer.LinkContainerCallback {
     private String url = "";
     private LinkContainer linkContainer;
 
+
+    private EngineListener engineListener; // Может убрать в один интерфейс
+
+    public void setEngineListener(EngineListener engineListener) {
+        this.engineListener = engineListener;
+    }
+
     public Engine(String url, int nBrowser) {
         this.url = url;
         browserPool = new BrowserPool(nBrowser);
@@ -54,8 +61,11 @@ public class Engine implements LinkContainer.LinkContainerCallback {
         browserPool.setTasksEndListener(new BrowserPool.TasksEndListener() {
             @Override
             public void onTaskEnd() {
-                System.out.println("TASK WAS DONE");
-                System.out.println(linkContainer);
+                if (engineListener != null) {
+                    engineListener.onCreateMapEnds();
+                    System.out.println("TASK WAS DONE");
+                    System.out.println(linkContainer);
+                }
             }
         });
 
@@ -63,11 +73,25 @@ public class Engine implements LinkContainer.LinkContainerCallback {
 
     public void prepareXSS(String url) {
         browserPool.execute(new XssAnalyser(url));
+        browserPool.setTasksEndListener(new BrowserPool.TasksEndListener() {
+            @Override
+            public void onTaskEnd() {
+                if (engineListener != null) {
+                    engineListener.onXssPrepareEnds();
+                }
+            }
+        });
+
     }
 
     @Override
     public void onLinkAdded(String urlToAnalise) {
         browserPool.execute(new LinkFinder(linkContainer, urlToAnalise, url));
+    }
+
+    public interface EngineListener {
+        public void onCreateMapEnds();
+        public void onXssPrepareEnds();
     }
 
 

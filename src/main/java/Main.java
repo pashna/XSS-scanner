@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 /**
  * Created by popka on 16.03.15.
  */
-public class Main {
+public class  Main {
 
     static private String url = "https://xss-game.appspot.com/level2/frame";
     static private int nBrowser = 1;
