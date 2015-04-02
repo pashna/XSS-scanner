@@ -16,11 +16,11 @@ public class Engine {
     private BrowserPool browserPool;
     private int nBrowser;
     private String url = "";
+
     private LinkContainer linkContainer; // "Карта сайта"
     private LinkContainer reflectXSSUrlContainer; // Список урлов с параметрами с потенциальной ReflectXSS-уязвимостью
 
-
-    private EngineListener engineListener; // Может убрать в один интерфейс
+    private EngineListener engineListener;
 
     public void setEngineListener(EngineListener engineListener) {
         this.engineListener = engineListener;
@@ -113,6 +113,5 @@ public class Engine {
         public void onCreateMapEnds();
         public void onXssPrepareEnds();
     }
-
 
 }

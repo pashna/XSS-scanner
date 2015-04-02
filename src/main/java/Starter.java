@@ -4,7 +4,7 @@
 public class Starter implements Engine.EngineListener{
 
     private String url = "http://www.insecurelabs.org/Task";
-    private int nBrowser = 1;
+    private int nBrowser = 2;
     private Engine engine;
 
     public void start() {

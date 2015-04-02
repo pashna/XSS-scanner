@@ -1,6 +1,7 @@
 package Tasks;
 
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriverException;
 
 import java.util.concurrent.TimeUnit;
 
@@ -31,8 +32,12 @@ public class ReflectXssSearcher extends BrowserRunnable{
     }
 
     private boolean wasScriptExecuted() {
-        JavascriptExecutor js = (JavascriptExecutor)getWebDriver();
-        Boolean result = (Boolean)js.executeScript("return location.hash == \"#10\"" );
-        return result;
+        try {
+            JavascriptExecutor js = (JavascriptExecutor) getWebDriver();
+            Boolean result = (Boolean) js.executeScript("return location.hash == \"#10\"");
+            return result;
+        } catch (WebDriverException e) {
+            return false;
+        }
     }
 }
