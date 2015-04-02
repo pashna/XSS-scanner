@@ -1,7 +1,7 @@
 import LinkContainer.LinkContainer;
 import Tasks.LinkFinder;
 import Tasks.Opener;
-import Tasks.XssAnalyser;
+import Tasks.XssPreparer;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -11,11 +11,12 @@ import java.util.Set;
 /**
  * Created by popka on 22.03.15.
  */
-public class Engine implements LinkContainer.LinkContainerCallback {
+public class Engine {
     private BrowserPool browserPool;
     private int nBrowser;
     private String url = "";
-    private LinkContainer linkContainer;
+    private LinkContainer linkContainer; // "Карта сайта"
+    private LinkContainer reflectXSSUrlContainer; // Список урлов с параметрами с потенциальной ReflectXSS-уязвимостью
 
 
     private EngineListener engineListener; // Может убрать в один интерфейс
@@ -24,18 +25,21 @@ public class Engine implements LinkContainer.LinkContainerCallback {
         this.engineListener = engineListener;
     }
 
+    // Конструктор без авторизации
     public Engine(String url, int nBrowser) {
         this.url = url;
         browserPool = new BrowserPool(nBrowser);
         browserPool.execute(new Opener(url));
     }
 
+    // Конструктор с авторизацией
     public Engine(String url, int nBrowser, int sec) {
         this.url = url;
         this.nBrowser = nBrowser;
         auth(sec);
     }
 
+    // авторизация
     private void auth(int sec) {
         WebDriver webDriver = new FirefoxDriver();
         webDriver.navigate().to(url); // Открываем страничку
@@ -51,11 +55,23 @@ public class Engine implements LinkContainer.LinkContainerCallback {
         webDriver.quit();
 
         browserPool = new BrowserPool(nBrowser);
-        browserPool.setCookie(url, cookieSet);
+        browserPool.setCookie(url, cookieSet); // Всем куки!
     }
 
+
+    /*
+    Создает "карту сайта"
+     */
     public void createMapOfSite(){
-        linkContainer = new LinkContainer(this);
+        linkContainer = new LinkContainer();
+
+        linkContainer.setCallback(new LinkContainer.LinkContainerCallback() { // Срабатывает, при добавлении в linkContainer записи
+            @Override
+            public void onLinkAdded(String urlToAnalise) {
+                browserPool.execute(new LinkFinder(linkContainer, urlToAnalise, url));
+            }
+        });
+
         linkContainer.add(url);
 
         browserPool.setTasksEndListener(new BrowserPool.TasksEndListener() {
@@ -63,7 +79,6 @@ public class Engine implements LinkContainer.LinkContainerCallback {
             public void onTaskEnd() {
                 if (engineListener != null) {
                     engineListener.onCreateMapEnds();
-                    System.out.println("TASK WAS DONE");
                     System.out.println(linkContainer);
                 }
             }
@@ -71,22 +86,26 @@ public class Engine implements LinkContainer.LinkContainerCallback {
 
     }
 
-    public void prepareXSS(String url) {
-        browserPool.execute(new XssAnalyser(url));
+    public void prepareXSS() {
         browserPool.setTasksEndListener(new BrowserPool.TasksEndListener() {
             @Override
             public void onTaskEnd() {
                 if (engineListener != null) {
                     engineListener.onXssPrepareEnds();
+                    System.out.println(reflectXSSUrlContainer);
                 }
             }
         });
+        reflectXSSUrlContainer = new LinkContainer();
+        reflectXSSUrlContainer.setCallback(new LinkContainer.LinkContainerCallback() { // При добавлении ссылки в контейнер хранения урлов с параметрами для ReflectXSS
+            @Override
+            public void onLinkAdded(String url) {
 
-    }
+            }
+        });
+        for (String url:linkContainer)
+            browserPool.execute(new XssPreparer(url, linkContainer, reflectXSSUrlContainer));
 
-    @Override
-    public void onLinkAdded(String urlToAnalise) {
-        browserPool.execute(new LinkFinder(linkContainer, urlToAnalise, url));
     }
 
     public interface EngineListener {

@@ -13,17 +13,11 @@ import java.util.regex.Pattern;
 /**
  * Created by popka on 16.03.15.
  */
-public class  Main {
-
-    static private String url = "https://xss-game.appspot.com/level2/frame";
-    static private int nBrowser = 1;
+public class  Main{
 
     public static void main(String[] args) {
-
-        Engine engine = new Engine(url, nBrowser);
-        //engine.createMapOfSite();
-        engine.prepareXSS(url);
-
+        Starter starter = new Starter();
+        starter.start();
     }
 
 }

@@ -74,7 +74,7 @@ public class BrowserPool {
                     }
 
                     r = (BrowserRunnable) queue.removeFirst();
-                    System.out.println("Количество запущенных = " + countOfRunningThreads.incrementAndGet());
+                    //System.out.println("Количество запущенных = " + countOfRunningThreads.incrementAndGet());
 
                 }
 
@@ -82,15 +82,15 @@ public class BrowserPool {
                 // the pool could leak browsers
                 try {
                     r.run(webDriver);
-                    System.out.println("Количество запущенных = " + countOfRunningThreads.decrementAndGet());
-                    System.out.println(webDriver.getCurrentUrl() + " запущен из потока №" + this.number);
+                    //System.out.println("Количество запущенных = " + countOfRunningThreads.decrementAndGet());
+                    //System.out.println(webDriver.getCurrentUrl() + " запущен из потока №" + this.number);
                     if (isTaskEnded()) {
                         if (tasksEndListener != null)
                             tasksEndListener.onTaskEnd();
                     }
                 }
                 catch (RuntimeException e) {
-                    // LOG
+                    e.printStackTrace();
                 }
             }
         }
