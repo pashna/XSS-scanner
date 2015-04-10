@@ -1,8 +1,5 @@
 import LinkContainer.LinkContainer;
-import Tasks.LinkFinder;
-import Tasks.Opener;
-import Tasks.ReflectXssSearcher;
-import Tasks.XssPreparer;
+import Tasks.*;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -19,6 +16,7 @@ public class Engine {
 
     private LinkContainer linkContainer; // "Карта сайта"
     private LinkContainer reflectXSSUrlContainer; // Список урлов с параметрами с потенциальной ReflectXSS-уязвимостью
+    private LinkContainer storedXSSUrlContainer; // Список урлов с параметрами с потенциальной StoredXSS-уязвимостью
 
     private EngineListener engineListener;
 
@@ -97,15 +95,26 @@ public class Engine {
                 }
             }
         });
+
         reflectXSSUrlContainer = new LinkContainer();
         reflectXSSUrlContainer.setCallback(new LinkContainer.LinkContainerCallback() { // При добавлении ссылки в контейнер хранения урлов с параметрами для ReflectXSS
             @Override
             public void onLinkAdded(String url) {
-                browserPool.execute(new ReflectXssSearcher(url));
+                browserPool.execute(new ReflectXssChecker(url));
             }
         });
+
+        storedXSSUrlContainer = new LinkContainer();
+        storedXSSUrlContainer.setCallback(new LinkContainer.LinkContainerCallback() {
+            @Override
+            public void onLinkAdded(String url) {
+                browserPool.execute(new StoredXssChecker(url, 1));
+            }
+        });
+
+
         for (String url:linkContainer)
-            browserPool.execute(new XssPreparer(url, linkContainer, reflectXSSUrlContainer));
+            browserPool.execute(new XssPreparer(url, linkContainer, reflectXSSUrlContainer, storedXSSUrlContainer));
 
     }
 

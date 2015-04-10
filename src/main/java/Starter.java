@@ -3,8 +3,8 @@
  */
 public class Starter implements Engine.EngineListener{
 
-    private String url = "http://www.insecurelabs.org/Task";
-    private int nBrowser = 2;
+    private String url = "https://xss-game.appspot.com/level2/frame";
+    private int nBrowser = 1;
     private Engine engine;
 
     public void start() {

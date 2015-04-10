@@ -30,6 +30,7 @@ public class XssPreparer extends BrowserRunnable {
     private final String TEXT_TO_REPLACE = "TEXT_TO_REPLACE";
     public static final String INPUT_VALUE = "999999999";
     private LinkContainer reflectXSSUrlContainer;
+    private LinkContainer storedXSSUrlContainer;
     private LinkContainer linkContainer;
 
     private final String FILL_FORM_SCRIPT =
@@ -50,10 +51,11 @@ public class XssPreparer extends BrowserRunnable {
     private final String SUBMIT_FORM = "document.forms[" + TEXT_TO_REPLACE +"].querySelector(\"[type=submit]\").click()";
 
 
-    public XssPreparer(String url, LinkContainer linkContainer ,LinkContainer reflectXSSUrlContainer) {
+    public XssPreparer(String url, LinkContainer linkContainer, LinkContainer reflectXSSUrlContainer, LinkContainer storedXSSUrlContainer) {
         this.url = url;
         this.reflectXSSUrlContainer = reflectXSSUrlContainer;
         this.linkContainer = linkContainer;
+        this.storedXSSUrlContainer = storedXSSUrlContainer;
     }
 
     @Override
@@ -74,28 +76,31 @@ public class XssPreparer extends BrowserRunnable {
 
             clearAllInput();
 
-            if (getWebDriver().getCurrentUrl().equals(currentUrl)) { // Если равен текущему урлу (значит, мы не перешли), стало быть проверяем на StoredXSS
-                if (isPageContainsInputValue()) // если на страничке после чистки инпутов, есть слово, которое мы ввели (INPUT_VALUE), будем проверять эту страничку
+            if (isPageContainsInputValue()) {// если на страничке после чистки инпутов, есть слово, которое мы ввели (INPUT_VALUE), будем проверять эту страничку
+                if (getWebDriver().getCurrentUrl().equals(currentUrl)) { // Если равен текущему урлу (значит, мы не перешли), стало быть проверяем на StoredXSS
                     System.out.println(currentUrl + "  STORED");
-            } else { // Добавляем в список проверок ReflectXSS
+                    storedXSSUrlContainer.add(currentUrl);
 
-                String decodedUrl = URLDecoder.decode(getWebDriver().getCurrentUrl());
+                } else { // Добавляем в список проверок ReflectXSS
 
-                if (decodedUrl.contains(INPUT_VALUE)) { // Если в списке параметров есть наш ввод - все ок
-                    if (isPageContainsInputValue()) { // если на страничке после чистки инпутов, есть слово, которое мы ввели (INPUT_VALUE), будем проверять эту страничку
-                        System.out.println(currentUrl + "  REFLECT");
-                        synchronized (reflectXSSUrlContainer) {
-                            reflectXSSUrlContainer.add(decodedUrl);
-                        }
+                    String decodedUrl = URLDecoder.decode(getWebDriver().getCurrentUrl());
+
+                    if (decodedUrl.contains(INPUT_VALUE)) { // Если в списке параметров есть наш ввод - все ок
+                        if (isPageContainsInputValue()) { // если на страничке после чистки инпутов, есть слово, которое мы ввели (INPUT_VALUE), будем проверять эту страничку
+                            System.out.println(currentUrl + "  REFLECT");
+                            synchronized (reflectXSSUrlContainer) {
+                                reflectXSSUrlContainer.add(decodedUrl);
+                            }
 
                         /*
                         Пока не оттестировано!
                          */
-                        decodedUrl = decodedUrl.substring(0, decodedUrl.indexOf("?")); // Обрезаем по аргументы и добавляем в карту сайта (вдруг там новые ссылки)
-                        synchronized (linkContainer) {
-                            linkContainer.add(decodedUrl);
-                        }
+                            decodedUrl = decodedUrl.substring(0, decodedUrl.indexOf("?")); // Обрезаем по аргументы и добавляем в карту сайта (вдруг там новые ссылки)
+                            synchronized (linkContainer) {
+                                linkContainer.add(decodedUrl);
+                            }
 
+                        }
                     }
                 }
             }

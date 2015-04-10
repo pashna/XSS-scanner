@@ -81,12 +81,25 @@ public class LinkFinder extends BrowserRunnable {
             Matcher m = ends.matcher(link);
             if (m.find()) {
                 String expansion = m.group(); // Получаем расширение, чтобы не скачавать файлы типа .doc и т.д.
-                if (!(expansion.equals(".htm")||expansion.equals(".html")||expansion.equals(".php"))) {
+                if (isAvailiableExpansion(expansion)) {
                     return false;
                 }
             }
             return true;
         }
+        return false;
+    }
+
+    private boolean isAvailiableExpansion(String expansion) {
+        if (expansion.equals(".htm")||
+            expansion.equals(".html")||
+            expansion.equals(".php") ||
+            expansion.equals(".phtml") ||
+            expansion.equals(".shtml") ||
+            expansion.equals(".asp") ||
+            expansion.equals(".aspx") ||
+            expansion.equals(".xml"))
+            return true;
         return false;
     }
 

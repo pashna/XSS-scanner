@@ -8,10 +8,10 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by popka on 03.04.15.
  */
-public class ReflectXssSearcher extends BrowserRunnable{
+public class ReflectXssChecker extends BrowserRunnable{
     private String url;
 
-    public ReflectXssSearcher(String url) {
+    public ReflectXssChecker(String url) {
         this.url = url;
     }
 
