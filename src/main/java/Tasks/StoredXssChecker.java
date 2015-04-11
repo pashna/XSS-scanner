@@ -5,6 +5,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -37,11 +38,12 @@ public class StoredXssChecker extends BrowserRunnable {
     private final String FORM_NUMBER_TO_REPLACE = "olo123qwe";
     private String SUBMIT_FORM = "document.forms[" + FORM_NUMBER_TO_REPLACE +"].querySelector(\"[type=submit]\").click()";
 
-    private final String[] XSS_LIST = {"<IMG SRC=/ onerror=location.hash=\"10\"></img>"};
+    private ArrayList<String> xssArrayList;
 
-    public StoredXssChecker(String url, int formNumber) {
+    public StoredXssChecker(String url, int formNumber, ArrayList<String> xssArrayList) {
         this.url = url;
         this.formNumber = formNumber;
+        this.xssArrayList = xssArrayList;
         SUBMIT_FORM = SUBMIT_FORM.replace(FORM_NUMBER_TO_REPLACE, formNumber + "");
     }
 
@@ -49,11 +51,11 @@ public class StoredXssChecker extends BrowserRunnable {
     @Override
     public void run() {
 
-        for (int i=0; i<XSS_LIST.length; i++) {
+        for (String xss : xssArrayList) {
             getWebDriver().navigate().to(url);
             getWebDriver().manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS); // Ждем загрузки
 
-            fillForm(XSS_LIST[i]);
+            fillForm(xss);
             submitForm();
 
             getWebDriver().manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS); // Ждем загрузки

@@ -17,7 +17,9 @@ public class Starter implements Engine.EngineListener{
         engine.setEngineListener(this);
         engine.createMapOfSite();
 
-        System.out.print(readFile("xssCheatSheet"));
+        //System.out.print(readFile("xssCheatSheet"));
+        //XmlParser parser = new XmlParser();
+        //parser.parse();
 
     }
 
@@ -32,27 +34,4 @@ public class Starter implements Engine.EngineListener{
         System.out.println("XssPreparedEnds");
     }
 
-    public String readFile(String filename) {
-
-        StringBuilder result = new StringBuilder("");
-
-        //Get file from resources folder
-        ClassLoader classLoader = getClass().getClassLoader();
-        File file = new File(classLoader.getResource(filename).getFile());
-
-        try {
-            Scanner scanner = new Scanner(file);
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                result.append(line).append("\n");
-            }
-
-            scanner.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return result.toString();
-    }
 }

@@ -7,6 +7,7 @@ import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 /**
@@ -22,6 +23,8 @@ public class Engine {
     private XssStoredContainer storedXSSUrlContainer; // Список урлов с параметрами с потенциальной StoredXSS-уязвимостью
 
     private EngineListener engineListener;
+
+    private ArrayList<String> xssArrayList;
 
     public void setEngineListener(EngineListener engineListener) {
         this.engineListener = engineListener;
@@ -99,11 +102,14 @@ public class Engine {
             }
         });
 
+        FileReader fileReader = new FileReader(FileReader.HIGH_LEVEL);
+        xssArrayList = fileReader.readFile();
+
         reflectXSSUrlContainer = new LinkContainer();
         reflectXSSUrlContainer.setCallback(new LinkContainer.LinkContainerCallback() { // При добавлении ссылки в контейнер хранения урлов с параметрами для ReflectXSS
             @Override
             public void onLinkAdded(String url) {
-                browserPool.execute(new ReflectXssChecker(url));
+                browserPool.execute(new ReflectXssChecker(url, xssArrayList));
             }
         });
 
@@ -111,7 +117,7 @@ public class Engine {
         storedXSSUrlContainer.setCallback(new XssContainerCallback() {
             @Override
             public void onLinkAdded(XssStored xssStored) {
-                browserPool.execute(new StoredXssChecker(xssStored.url, xssStored.formNumber));
+                browserPool.execute(new StoredXssChecker(xssStored.url, xssStored.formNumber, xssArrayList));
             }
         });
 
