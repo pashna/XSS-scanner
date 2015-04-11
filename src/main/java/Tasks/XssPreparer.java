@@ -1,6 +1,8 @@
 package Tasks;
 
 import LinkContainer.LinkContainer;
+import LinkContainer.XssStoredContainer;
+import LinkContainer.XssStored;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriverException;
@@ -30,28 +32,28 @@ public class XssPreparer extends BrowserRunnable {
     private final String TEXT_TO_REPLACE = "TEXT_TO_REPLACE";
     public static final String INPUT_VALUE = "999999999";
     private LinkContainer reflectXSSUrlContainer;
-    private LinkContainer storedXSSUrlContainer;
+    private XssStoredContainer storedXSSUrlContainer;
     private LinkContainer linkContainer;
 
     private final String FILL_FORM_SCRIPT =
-            "var inputs = document.getElementsByTagName(\"input\");\n" +
-            "for (var i=0; i<inputs.length; i++) {\n" +
-            "    inputs[i].value = \"" + TEXT_TO_REPLACE + "\";\n" +
-            "    inputs[i].checked = \"true\";\n" +
-            "}\n" +
-            "var selects = document.getElementsByTagName(\"select\");\n" +
-            "for (var i=0; i<selects.length; i++) {\n" +
-            "    selects[i].children[1].selected = \"true\";\n" +
-            "}\n" +
-            "var textareas = document.getElementsByTagName(\"textarea\");\n" +
-            "for (var i=0; i<textareas.length; i++) {\n" +
-            "    textareas[i].value=\""+TEXT_TO_REPLACE+ "\";\n" +
-            "}";
+            "var inputs = document.getElementsByTagName('input');\n" +
+                    "for (var i=0; i<inputs.length; i++) {\n" +
+                    "    inputs[i].value = '"+TEXT_TO_REPLACE+"';\n" +
+                    "    inputs[i].checked = \"true\";\n" +
+                    "}\n" +
+                    "var selects = document.getElementsByTagName(\"select\");\n" +
+                    "for (var i=0; i<selects.length; i++) {\n" +
+                    "    selects[i].children[1].selected = \"true\";\n" +
+                    "}\n" +
+                    "var textareas = document.getElementsByTagName(\"textarea\");\n" +
+                    "for (var i=0; i<textareas.length; i++) {\n" +
+                    "    textareas[i].value=' " +TEXT_TO_REPLACE +"';\n" +
+                    "}";
 
     private final String SUBMIT_FORM = "document.forms[" + TEXT_TO_REPLACE +"].querySelector(\"[type=submit]\").click()";
 
 
-    public XssPreparer(String url, LinkContainer linkContainer, LinkContainer reflectXSSUrlContainer, LinkContainer storedXSSUrlContainer) {
+    public XssPreparer(String url, LinkContainer linkContainer, LinkContainer reflectXSSUrlContainer, XssStoredContainer storedXSSUrlContainer) {
         this.url = url;
         this.reflectXSSUrlContainer = reflectXSSUrlContainer;
         this.linkContainer = linkContainer;
@@ -79,7 +81,7 @@ public class XssPreparer extends BrowserRunnable {
             if (isPageContainsInputValue()) {// если на страничке после чистки инпутов, есть слово, которое мы ввели (INPUT_VALUE), будем проверять эту страничку
                 if (getWebDriver().getCurrentUrl().equals(currentUrl)) { // Если равен текущему урлу (значит, мы не перешли), стало быть проверяем на StoredXSS
                     System.out.println(currentUrl + "  STORED");
-                    storedXSSUrlContainer.add(currentUrl);
+                    storedXSSUrlContainer.add(new XssStored(url, i));
 
                 } else { // Добавляем в список проверок ReflectXSS
 

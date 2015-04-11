@@ -1,4 +1,7 @@
 import LinkContainer.LinkContainer;
+import LinkContainer.XssStoredContainer;
+import LinkContainer.XssStoredContainer.XssContainerCallback;
+import LinkContainer.XssStored;
 import Tasks.*;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
@@ -16,7 +19,7 @@ public class Engine {
 
     private LinkContainer linkContainer; // "Карта сайта"
     private LinkContainer reflectXSSUrlContainer; // Список урлов с параметрами с потенциальной ReflectXSS-уязвимостью
-    private LinkContainer storedXSSUrlContainer; // Список урлов с параметрами с потенциальной StoredXSS-уязвимостью
+    private XssStoredContainer storedXSSUrlContainer; // Список урлов с параметрами с потенциальной StoredXSS-уязвимостью
 
     private EngineListener engineListener;
 
@@ -104,11 +107,11 @@ public class Engine {
             }
         });
 
-        storedXSSUrlContainer = new LinkContainer();
-        storedXSSUrlContainer.setCallback(new LinkContainer.LinkContainerCallback() {
+        storedXSSUrlContainer = new XssStoredContainer();
+        storedXSSUrlContainer.setCallback(new XssContainerCallback() {
             @Override
-            public void onLinkAdded(String url) {
-                browserPool.execute(new StoredXssChecker(url, 1));
+            public void onLinkAdded(XssStored xssStored) {
+                browserPool.execute(new StoredXssChecker(xssStored.url, xssStored.formNumber));
             }
         });
 
