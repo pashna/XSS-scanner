@@ -102,7 +102,7 @@ public class Engine {
             }
         });
 
-        FileReader fileReader = new FileReader(FileReader.HIGH_LEVEL);
+        FileReader fileReader = new FileReader(FileReader.TEST);
         xssArrayList = fileReader.readFile();
 
         reflectXSSUrlContainer = new LinkContainer();

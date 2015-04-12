@@ -11,10 +11,12 @@ public class FileReader {
     public static final int LOW_LEVEL = 0;
     public static final int MEDIUM_LEVEL = 1;
     public static final int HIGH_LEVEL = 2;
+    public static final int TEST = 3;
 
     public final String lowLevel = "xssLow";
     public final String mediumLevel = "xssMedium";
     public final String highLevel = "xssHigh";
+    public final String cheatSheet = "xssCheatSheet";
 
     private int level;
     private ArrayList<String> filenameArrayList = new ArrayList<String>();
@@ -34,6 +36,10 @@ public class FileReader {
                 filenameArrayList.add(lowLevel);
                 filenameArrayList.add(mediumLevel);
                 filenameArrayList.add(highLevel);
+                break;
+
+            case TEST:
+                filenameArrayList.add(cheatSheet);
                 break;
         }
     }

