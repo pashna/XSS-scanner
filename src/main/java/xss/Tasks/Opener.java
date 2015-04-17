@@ -1,6 +1,4 @@
-package Tasks;
-
-import Tasks.BrowserRunnable;
+package xss.Tasks;
 
 /**
  * Created by popka on 21.03.15.

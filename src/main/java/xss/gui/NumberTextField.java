@@ -1,4 +1,4 @@
-package GUI;
+package xss.gui;
 
 import javafx.scene.control.TextField;
 
@@ -7,7 +7,6 @@ import javafx.scene.control.TextField;
  */
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import javafx.beans.property.ObjectProperty;
@@ -16,7 +15,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.TextField;
 
 /**
  * Textfield implementation that accepts formatted number and stores them in a

@@ -7,13 +7,14 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.*?>
-<?import GUI.NumberSpinner?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="452.0" prefWidth="290.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="GUI.MainController">
+
+<?import xss.gui.NumberSpinner?>
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="452.0" prefWidth="290.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="xss.gui.MainController">
   <children>
     <Label layoutX="54.0" layoutY="21.0" prefWidth="43.0" text="URL:" />
     <TextField id="url_textfield" layoutX="45.0" layoutY="41.0" prefWidth="200.0" text="http://" focusTraversable="false"/>
-    <Button layoutX="103.0" layoutY="404.0" mnemonicParsing="false" onAction="#onClickStart" prefWidth="101.0" text="Начать">
+    <Button id="startBtn" layoutX="103.0" layoutY="404.0" mnemonicParsing="false" onAction="#onClickStart" prefWidth="101.0" text="Начать">
       <font>
         <Font size="17.0" />
       </font>

@@ -1,20 +1,22 @@
-package GUI;
+package xss.gui;
 
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import xss.Engine;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
 /**
  * Created by popka on 17.04.15.
  */
-public class MainController {
+public class MainController implements Engine.EngineListener{
 
     private Scene scene;
+    Engine engine;
     public void setScene(Scene scene) {
         this.scene = scene;
     }
@@ -22,23 +24,24 @@ public class MainController {
     @FXML
     public void onClickStart() {
         TextField urlTextField = (TextField) scene.lookup("#url_textfield");
-        if (!isCorrectUrl(urlTextField.getText())) {
+        String url = urlTextField.getText();
+        if (!isCorrectUrl(url)) {
             return; // Объяснить, что урл введен неправильно!
         }
 
         RadioButton radioSite = (RadioButton) scene.lookup("#radioSite");
-        if (radioSite.isSelected()) {
-
-        } else {
-
-        }
 
         NumberSpinner nBrowserSpinner = (NumberSpinner) scene.lookup("#nBrowsers");
         int nBrowsers = nBrowserSpinner.getValue();
 
-        engine = new Engine(url, nBrowser);
+        engine = new Engine(url, nBrowsers);
         engine.setEngineListener(this);
-        engine.createMapOfSite();
+
+        if (radioSite.isSelected()) {
+            engine.createMapOfSite();
+        } else {
+
+        }
 
 
 
@@ -54,6 +57,16 @@ public class MainController {
         return false;
     }
 
+    @Override
+    public void onCreateMapEnds() {
+        System.out.println("createMapsEnds");
+        engine.prepareXSS();
+    }
+
+    @Override
+    public void onXssPrepareEnds() {
+        System.out.println("XssPreparedEnds");
+    }
 
 
 }
