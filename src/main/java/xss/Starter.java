@@ -24,7 +24,7 @@ public class Starter implements Engine.EngineListener{
     @Override
     public void onCreateMapEnds() {
         System.out.println("createMapsEnds");
-        engine.prepareXSS();
+        engine.prepareXSS(FileReader.TEST);
     }
 
     @Override

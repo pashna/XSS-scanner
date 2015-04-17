@@ -5,7 +5,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+
+import java.net.URL;
 
 /**
  * Created by popka on 17.04.15.
@@ -18,13 +21,18 @@ public class MainApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        FXMLLoader loader = new FXMLLoader();
+        //URL location=getClass().getResource(fxmlFile);
+        //FXMLLoader loader = new FXMLLoader(location);
 
         //ClassLoader loader1 = getClass().getClassLoader();
         //InputStream stream = getClass().getClassLoader().getResourceAsStream(fxmlFile);
-        Parent root = (Parent)loader.load(getClass().getClassLoader().getResourceAsStream(fxmlFile));
 
-        //Parent root = (Parent) loader.load(getClass().getResourceAsStream(fxmlFile));
+//        Parent root = (Parent)loader.load(getClass().getClassLoader().getResourceAsStream(fxmlFile));
+
+//        Parent root = (Parent) loader.load(getClass().getResourceAsStream(fxmlFile));
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getClassLoader().getResource(fxmlFile));
+        Parent root = (Parent) loader.load();
         Scene scene = new Scene(root);
 
         stage.setTitle("XSS-Scanner");

@@ -93,7 +93,7 @@ public class Engine {
 
     }
 
-    public void prepareXSS() {
+    public void prepareXSS(int level) {
         browserPool.setTasksEndListener(new BrowserPool.TasksEndListener() {
             @Override
             public void onTaskEnd() {
@@ -104,7 +104,7 @@ public class Engine {
             }
         });
 
-        FileReader fileReader = new FileReader(FileReader.TEST);
+        FileReader fileReader = new FileReader(level);
         xssArrayList = fileReader.readFile();
 
         reflectXSSUrlContainer = new LinkContainer();

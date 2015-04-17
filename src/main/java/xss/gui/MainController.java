@@ -2,9 +2,11 @@ package xss.gui;
 
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import xss.Engine;
+import xss.FileReader;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -17,6 +19,12 @@ public class MainController implements Engine.EngineListener{
 
     private Scene scene;
     Engine engine;
+
+    int codeValue;
+
+    public static final String LOW_LEVEL = "Поверхностный";
+    public static final String MEDIUM_LEVEL = "Средний";
+    public static final String HIGH_LEVEL = "Глубокий";
     public void setScene(Scene scene) {
         this.scene = scene;
     }
@@ -43,9 +51,18 @@ public class MainController implements Engine.EngineListener{
 
         }
 
+        ComboBox<String> comboBox = (ComboBox<String>) scene.lookup("#chooseDepth");
+        String value = comboBox.getValue();
 
-
-
+        if (value.equals(LOW_LEVEL)) {
+            codeValue = FileReader.LOW_LEVEL;
+        }
+        else if (value.equals(MEDIUM_LEVEL)) {
+            codeValue = FileReader.MEDIUM_LEVEL;
+        }
+        else if (value.equals(HIGH_LEVEL)) {
+            codeValue = FileReader.HIGH_LEVEL;
+        }
 
     }
 
@@ -60,13 +77,12 @@ public class MainController implements Engine.EngineListener{
     @Override
     public void onCreateMapEnds() {
         System.out.println("createMapsEnds");
-        engine.prepareXSS();
+        engine.prepareXSS(codeValue);
     }
 
     @Override
     public void onXssPrepareEnds() {
         System.out.println("XssPreparedEnds");
     }
-
 
 }

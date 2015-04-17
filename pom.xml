@@ -12,17 +12,18 @@
     <build>
         <plugins>
 
-
             <plugin>
                 <groupId>com.zenjava</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>2.0</version>
                 <configuration>
-                    <mainClass>Starter</mainClass>
+                    <mainClass>xss.gui.MainApp</mainClass>
                 </configuration>
             </plugin>
-    </plugins>
+
+        </plugins>
     </build>
+
 
     <dependencies>
         <dependency>
