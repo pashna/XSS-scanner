@@ -7,6 +7,20 @@
     <groupId>XSS-Scanner</groupId>
     <artifactId>XSS-Scanner</artifactId>
     <version>1.0-SNAPSHOT</version>
+<!--    <packaging>jar</packaging>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.zenjava</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>2.0</version>
+                <configuration>
+                    <mainClass>Starter</mainClass>
+                </configuration>
+            </plugin>
+    </plugins>
+    </build> -->
 
     <dependencies>
         <dependency>

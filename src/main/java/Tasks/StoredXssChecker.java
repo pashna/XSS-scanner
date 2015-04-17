@@ -59,7 +59,10 @@ public class StoredXssChecker extends BrowserRunnable {
             submitForm();
 
             getWebDriver().manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS); // Ждем загрузки
-            if (wasScriptExecuted()) System.out.println("XSS STORED WAS FOUND");
+            if (wasScriptExecuted()) {
+                System.out.println("XSS STORED WAS FOUND" + "   " + xss);
+                break;
+            }
 
         }
 
@@ -69,7 +72,6 @@ public class StoredXssChecker extends BrowserRunnable {
     private void fillForm(String xss_text) {
         JavascriptExecutor js = (JavascriptExecutor) getWebDriver();
         String fillFormScript = FILL_FORM_SCRIPT.replaceAll(TEXT_TO_REPLACE, xss_text);
-        System.out.println(fillFormScript);
         js.executeScript(fillFormScript);
     }
 

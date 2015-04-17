@@ -9,7 +9,8 @@ import java.util.Scanner;
 public class Starter implements Engine.EngineListener{
 
     private String url = "http://www.insecurelabs.org/Task";
-    private int nBrowser = 4;
+    //private String url = "https://xss-game.appspot.com/level2/frame";
+    private int nBrowser = 6;
     private Engine engine;
 
     public void start() {
