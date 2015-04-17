@@ -1,4 +1,4 @@
-package Tasks;
+package xss.Tasks;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;

@@ -1,4 +1,4 @@
-package LinkContainer;
+package xss.LinkContainer;
 
 import java.util.LinkedHashSet;
 

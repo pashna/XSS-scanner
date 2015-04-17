@@ -1,16 +1,14 @@
-package Tasks;
+package xss.Tasks;
 
-import LinkContainer.LinkContainer;
-import LinkContainer.XssStoredContainer;
-import LinkContainer.XssStored;
+import xss.LinkContainer.LinkContainer;
+import xss.LinkContainer.XssStoredContainer;
+import xss.LinkContainer.XssStored;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 
 import java.net.URLDecoder;
-import java.net.URLEncoder;
-import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 

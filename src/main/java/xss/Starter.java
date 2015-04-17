@@ -1,7 +1,4 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Scanner;
+package xss;
 
 /**
  * Created by popka on 02.04.15.
@@ -19,7 +16,7 @@ public class Starter implements Engine.EngineListener{
         engine.createMapOfSite();
 
         //System.out.print(readFile("xssCheatSheet"));
-        //XmlParser parser = new XmlParser();
+        //xss.XmlParser parser = new xss.XmlParser();
         //parser.parse();
 
     }

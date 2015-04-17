@@ -1,4 +1,4 @@
-package LinkContainer;
+package xss.LinkContainer;
 
 /**
  * Created by popka on 11.04.15.

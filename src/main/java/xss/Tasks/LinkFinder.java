@@ -1,6 +1,6 @@
-package Tasks;
+package xss.Tasks;
 
-import LinkContainer.LinkContainer;
+import xss.LinkContainer.LinkContainer;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;

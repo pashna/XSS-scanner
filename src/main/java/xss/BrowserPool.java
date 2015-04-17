@@ -1,5 +1,6 @@
-import LinkContainer.LinkContainer;
-import Tasks.BrowserRunnable;
+package xss;
+
+import xss.Tasks.BrowserRunnable;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.InvalidCookieDomainException;
 import org.openqa.selenium.WebDriver;

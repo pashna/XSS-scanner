@@ -1,8 +1,10 @@
-import LinkContainer.LinkContainer;
-import LinkContainer.XssStoredContainer;
-import LinkContainer.XssStoredContainer.XssContainerCallback;
-import LinkContainer.XssStored;
-import Tasks.*;
+package xss;
+
+import xss.LinkContainer.LinkContainer;
+import xss.LinkContainer.XssStoredContainer;
+import xss.LinkContainer.XssStoredContainer.XssContainerCallback;
+import xss.LinkContainer.XssStored;
+import xss.Tasks.*;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;

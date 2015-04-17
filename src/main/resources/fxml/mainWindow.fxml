@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
+
+
+<?import xss.gui.NumberSpinner?>
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="452.0" prefWidth="290.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="xss.gui.MainController">
+  <children>
+    <Label layoutX="54.0" layoutY="21.0" prefWidth="43.0" text="URL:" />
+    <TextField id="url_textfield" layoutX="45.0" layoutY="41.0" prefWidth="200.0" text="http://" focusTraversable="false"/>
+    <Button id="startBtn" layoutX="103.0" layoutY="404.0" mnemonicParsing="false" onAction="#onClickStart" prefWidth="101.0" text="Начать">
+      <font>
+        <Font size="17.0" />
+      </font>
+    </Button>
+    <CheckBox  id="checkAuth" layoutX="83.0" layoutY="354.0" mnemonicParsing="false" prefWidth="116.0" text="Авторизация"/>
+    <ChoiceBox id="chooseDepth" layoutX="76.0" layoutY="286.0" value="Средний">
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="Поверхностный" />
+          <String fx:value="Средний" />
+          <String fx:value="Глубокий" />
+        </FXCollections>
+      </items>
+    </ChoiceBox>
+    <RadioButton id="radioSite" layoutX="32.0" layoutY="136.0" mnemonicParsing="false" selected="true" text="Весь сайт">
+      <toggleGroup>
+        <ToggleGroup fx:id="radioGroup1" />
+      </toggleGroup>
+    </RadioButton>
+    <RadioButton id="radioPage" layoutX="139.0" layoutY="135.0" mnemonicParsing="false" prefWidth="137.0001220703125" text="Одна страничка" toggleGroup="$radioGroup1"/>
+    <Label layoutX="54.0" layoutY="264.0" text="Глубина поиска:" />
+    <Label layoutX="83.0" layoutY="63.0" prefWidth="185.0" text="Например: http://www.yandex.ru/">
+      <font>
+        <Font size="10.0" />
+      </font>
+    </Label>
+    <Label layoutX="55.0" layoutY="109.0" text="Количество страниц:" />
+    <NumberSpinner id="nBrowsers" layoutX="45.0" layoutY="212.0" prefWidth="200.0"/>
+    <Label layoutX="54.0" layoutY="189.0" text="" />
+    <Label layoutX="54.0" layoutY="189.0" prefWidth="162.0" text="Количество браузеров:" />
+  </children>
+</AnchorPane>
