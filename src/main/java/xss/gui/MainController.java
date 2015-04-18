@@ -1,11 +1,15 @@
 package xss.gui;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import xss.Engine;
 import xss.FileReader;
 
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,6 +24,10 @@ public class MainController implements Engine.EngineListener{
 
     Button startBtn;
     Button cancelBtn;
+
+    AnchorPane stateLayout;
+    Label stateLabel;
+    Label xssCountLabel;
 
     private final int ALL_SITE = 1;
     private final int ONE_PAGE = 2;
@@ -41,15 +49,23 @@ public class MainController implements Engine.EngineListener{
 
     @FXML
     public void onClickStart() {
+
+
         TextField urlTextField = (TextField) scene.lookup("#url_textfield");
         url = urlTextField.getText();
-        if (!isCorrectUrl(url)) {
+
+        Label urlErrorLabel = (Label) scene.lookup("#urlError");
+        if (isCorrectUrl(url)) { //Коректный ли урл
+            if (!url.endsWith("/")) url += "/"; // Если не оканчивается на "/", дописать его
+            urlErrorLabel.setVisible(false);
+        } else {
+            urlErrorLabel.setVisible(true);
+            urlTextField.requestFocus();
             return; // Объяснить, что урл введен неправильно!
         }
 
         NumberSpinner nBrowserSpinner = (NumberSpinner) scene.lookup("#nBrowsers");
         nBrowsers = nBrowserSpinner.getValue();
-
 
 
         ComboBox<String> comboBox = (ComboBox<String>) scene.lookup("#chooseDepth");
@@ -83,6 +99,11 @@ public class MainController implements Engine.EngineListener{
         cancelBtn = (Button) scene.lookup("#cancelBtn");
         startBtn.setDisable(true);
 
+        stateLayout = (AnchorPane) scene.lookup("#stateLayout");
+
+        stateLabel = (Label) scene.lookup("#stateLabel");
+        xssCountLabel = (Label) scene.lookup("#xssCountLabel");
+
         Starter starter = new Starter(this);
         Thread thread = new Thread(starter);
         thread.start();
@@ -100,15 +121,17 @@ public class MainController implements Engine.EngineListener{
         startBtn.setDisable(false);
         startBtn.setVisible(false);
         cancelBtn.setVisible(true);
+        stateLayout.setVisible(true);
     }
 
     private void showStartBtn() {
         cancelBtn.setVisible(false);
         startBtn.setVisible(true);
+        stateLayout.setVisible(false);
     }
 
     private boolean isCorrectUrl(String url) {
-        String regex = "^(https?)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]/";
+        String regex = "^(https?)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
         Pattern urlPattern = Pattern.compile(regex);
         Matcher m = urlPattern.matcher(url);
         if (m.find()) return true;
@@ -118,6 +141,11 @@ public class MainController implements Engine.EngineListener{
     @Override
     public void onCreateMapEnds() {
         System.out.println("createMapsEnds");
+        try {
+            xssCountLabel.setVisible(true);
+            stateLabel.setText("Ищем XSS...");
+        } catch (IllegalStateException e) {}
+
         engine.prepareXSS(codeValue);
     }
 

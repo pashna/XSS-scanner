@@ -1,6 +1,7 @@
 package xss.gui;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,16 +21,8 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        Platform.setImplicitExit(false);
 
-        //URL location=getClass().getResource(fxmlFile);
-        //FXMLLoader loader = new FXMLLoader(location);
-
-        //ClassLoader loader1 = getClass().getClassLoader();
-        //InputStream stream = getClass().getClassLoader().getResourceAsStream(fxmlFile);
-
-//        Parent root = (Parent)loader.load(getClass().getClassLoader().getResourceAsStream(fxmlFile));
-
-//        Parent root = (Parent) loader.load(getClass().getResourceAsStream(fxmlFile));
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getClassLoader().getResource(fxmlFile));
         Parent root = (Parent) loader.load();

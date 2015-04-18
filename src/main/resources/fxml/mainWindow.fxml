@@ -5,29 +5,27 @@
 <?import javafx.collections.*?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.*?>
-
 <?import xss.gui.NumberSpinner?>
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="452.0" prefWidth="290.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="xss.gui.MainController">
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="463.0000999999975" prefWidth="290.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="xss.gui.MainController">
   <children>
     <Label layoutX="50.0" layoutY="17.0" prefWidth="43.0" styleClass="label-bright" text="URL:">
       <stylesheets>
         <URL value="@style.css" />
       </stylesheets>
     </Label>
+    <NumberSpinner id="nBrowsers" layoutX="110.0" layoutY="212.0" prefWidth="70.0" prefHeight="25.0"/>
     <TextField id="url_textfield" focusTraversable="false" layoutX="41.0" layoutY="34.0" prefHeight="34.0" prefWidth="200.0" text="http://" />
-    <Button id="startBtn" layoutX="103.0" layoutY="404.0" mnemonicParsing="false" onAction="#onClickStart" prefWidth="101.0" text="Начать">
+    <Button id="startBtn" layoutX="95.0" layoutY="408.0" mnemonicParsing="false" onAction="#onClickStart" prefWidth="101.0" text="Начать">
       <font>
-        <Font size="17.0" />
+        <Font size="17.0" fx:id="x1" />
       </font>
     </Button>
-    <Button id="cancelBtn" layoutX="103.0" layoutY="404.0" mnemonicParsing="false" onAction="#onCancelClick" prefWidth="101.0" text="Отмена" visible="false">
-      <font>
-          <Font size="17.0" />
-      </font>
-    </Button>
+    <Button id="cancelBtn" font="$x1" layoutX="103.0" layoutY="404.0" mnemonicParsing="false" onAction="#onCancelClick" prefWidth="101.0" text="Отмена" visible="false" />
     <CheckBox id="checkAuth" layoutX="83.0" layoutY="354.0" mnemonicParsing="false" prefWidth="116.0" styleClass="white-text" text="Авторизация" />
     <ComboBox id="chooseDepth" layoutX="76.0" layoutY="286.0" style="" value="Средний">
       <items>
@@ -53,7 +51,30 @@
     <Label layoutX="55.0" layoutY="109.0" styleClass="label-bright" text="Количество страниц:" />
     <Label layoutX="54.0" layoutY="189.0" styleClass="label-bright" text="" />
     <Label layoutX="54.0" layoutY="188.0" prefWidth="162.0" styleClass="label-bright" text="Количество браузеров:" />
-    <NumberSpinner id="nBrowsers" layoutX="110.0" layoutY="212.0" prefWidth="70.0" prefHeight="25.0"/>
+    <Label id="urlError" layoutX="135.0" layoutY="18.0" text="Ошибка ввода URL" textFill="#ff3d00" visible="false">
+      <font>
+        <Font size="11.0" />
+      </font>
+    </Label>
+    <AnchorPane id="stateLayout" layoutX="17.0" layoutY="7.0" opacity="1.0" prefHeight="390.0" prefWidth="257.0" styleClass="in_workAnchor" visible="false">
+      <children>
+        <Label id="stateLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="32.0" layoutY="164.0" mnemonicParsing="false" mouseTransparent="false" pickOnBounds="false" prefHeight="51.0" prefWidth="195.0" style="" text="Собраем карту сайта..." textAlignment="CENTER" textFill="WHITE" wrapText="false">
+          <font>
+            <Font size="15.0" />
+          </font>
+        </Label>
+        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="29.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+          <image>
+            <Image url="@../loading_dog.gif" />
+          </image>
+        </ImageView>
+        <Label id="xssCountLabel" layoutX="71.0" layoutY="227.0" prefWidth="116.0" text="Уже найдено: 0" textFill="WHITE" visible="false">
+          <font>
+            <Font size="14.0" />
+          </font>
+        </Label>
+      </children>
+    </AnchorPane>
   </children>
   <stylesheets>
     <URL value="@style.css" />

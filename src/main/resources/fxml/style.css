@@ -32,6 +32,11 @@
     -fx-background-color: "#232423";
 }
 
+.in_workAnchor {
+    -fx-background-color: rgba(0,0,0,0.9);
+    -fx-background-radius: 10px, 10px, 10px, 10px;
+}
+
 .button {
     -fx-background-color:
         #0C0A0C,
