@@ -65,6 +65,10 @@ public class Engine {
         browserPool.setCookie(url, cookieSet); // Всем куки!
     }
 
+    public void stopAnalyse() {
+        browserPool.stop();
+    }
+
 
     /*
     Создает "карту сайта"
@@ -133,7 +137,6 @@ public class Engine {
         public void onCreateMapEnds();
         public void onXssPrepareEnds();
     }
-
 
 
 }

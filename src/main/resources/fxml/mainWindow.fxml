@@ -23,6 +23,11 @@
         <Font size="17.0" />
       </font>
     </Button>
+    <Button id="cancelBtn" layoutX="103.0" layoutY="404.0" mnemonicParsing="false" onAction="#onCancelClick" prefWidth="101.0" text="Отмена" visible="false">
+      <font>
+          <Font size="17.0" />
+      </font>
+    </Button>
     <CheckBox id="checkAuth" layoutX="83.0" layoutY="354.0" mnemonicParsing="false" prefWidth="116.0" styleClass="white-text" text="Авторизация" />
     <ComboBox id="chooseDepth" layoutX="76.0" layoutY="286.0" style="" value="Средний">
       <items>

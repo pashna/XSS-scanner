@@ -76,7 +76,6 @@ public class BrowserPool {
 
                     r = (BrowserRunnable) queue.removeFirst();
                     countOfRunningThreads.incrementAndGet();
-                    //System.out.println("Количество запущенных = " + countOfRunningThreads.incrementAndGet());
 
                 }
 
@@ -85,8 +84,7 @@ public class BrowserPool {
                 try {
                     r.run(webDriver);
                     countOfRunningThreads.decrementAndGet();
-                    //System.out.println("Количество запущенных = " + countOfRunningThreads.decrementAndGet());
-                    //System.out.println(webDriver.getCurrentUrl() + " запущен из потока №" + this.number);
+
                     if (isTaskEnded()) {
                         if (tasksEndListener != null)
                             tasksEndListener.onTaskEnd();
@@ -127,5 +125,14 @@ public class BrowserPool {
 
     public interface TasksEndListener {
         public void onTaskEnd();
+    }
+
+    public void stop() {
+        for (int i=0; i<nBrowsers; i++) {
+            browsers[i].getWebDriver().close();
+            browsers[i].stop();
+        }
+        queue.clear();
+        countOfRunningThreads.set(0);
     }
 }

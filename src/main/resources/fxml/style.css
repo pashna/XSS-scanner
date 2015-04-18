@@ -32,7 +32,7 @@
     -fx-background-color: "#232423";
 }
 
-#startBtn {
+.button {
     -fx-background-color:
         #0C0A0C,
         linear-gradient(#50424b 0%, #1f2429 20%, #191d22 100%),
@@ -48,7 +48,7 @@
     -fx-padding: 10 20 10 20;
 }
 
-#startBtn:hover {
+.button:hover {
     -fx-background-color:
         #090a0c,
         linear-gradient(#45424b 0%, #1f2429 20%, #191d22 100%),
@@ -64,12 +64,12 @@
     -fx-padding: 10 20 10 20;
 }
 
-#startBtn:pressed {
+.button:pressed {
     -fx-padding: 10 15 13 15;
     -fx-background-insets: 2 0 0 0,2 0 3 0, 2 0 4 0, 2 0 5 0;
 }
 
-#startBtn Text {
+.button Text {
     -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.9) , 1, 0.0 , 0 , 1 );
 }
 
