@@ -1,9 +1,7 @@
 package xss;
 
-import xss.LinkContainer.LinkContainer;
-import xss.LinkContainer.XssStoredContainer;
+import xss.LinkContainer.*;
 import xss.LinkContainer.XssStoredContainer.XssContainerCallback;
-import xss.LinkContainer.XssStored;
 import xss.Tasks.*;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
@@ -21,8 +19,9 @@ public class Engine {
     private String url = "";
 
     private LinkContainer linkContainer; // "Карта сайта"
-    private LinkContainer reflectXSSUrlContainer; // Список урлов с параметрами с потенциальной ReflectXSS-уязвимостью
-    private XssStoredContainer storedXSSUrlContainer; // Список урлов с параметрами с потенциальной StoredXSS-уязвимостью
+    private LinkContainer potentialReflectXSSUrlContainer; // Список урлов с параметрами с потенциальной ReflectXSS-уязвимостью
+    private XssStoredContainer potentialStoredXSSUrlContainer; // Список урлов с параметрами с потенциальной StoredXSS-уязвимостью
+    private XssContainer xssContainer;
 
     private EngineListener engineListener;
 
@@ -99,12 +98,21 @@ public class Engine {
     }
 
     public void prepareXSS(int level) {
+        xssContainer = new XssContainer();
+
+        xssContainer.setCallback(new XssContainer.XssContainerCallback() {
+            @Override
+            public void onXssAdded(XssStruct xssStruct) {
+                engineListener.onXssAdded(xssStruct);
+            }
+        });
+
         browserPool.setTasksEndListener(new BrowserPool.TasksEndListener() {
             @Override
             public void onTaskEnd() {
                 if (engineListener != null) {
                     engineListener.onXssPrepareEnds();
-                    System.out.println(reflectXSSUrlContainer);
+                    System.out.println(potentialReflectXSSUrlContainer);
                 }
             }
         });
@@ -112,25 +120,25 @@ public class Engine {
         FileReader fileReader = new FileReader(level);
         xssArrayList = fileReader.readFile();
 
-        reflectXSSUrlContainer = new LinkContainer();
-        reflectXSSUrlContainer.setCallback(new LinkContainer.LinkContainerCallback() { // При добавлении ссылки в контейнер хранения урлов с параметрами для ReflectXSS
+        potentialReflectXSSUrlContainer = new LinkContainer();
+        potentialReflectXSSUrlContainer.setCallback(new LinkContainer.LinkContainerCallback() { // При добавлении ссылки в контейнер хранения урлов с параметрами для ReflectXSS
             @Override
             public void onLinkAdded(String url) {
-                browserPool.execute(new ReflectXssChecker(url, xssArrayList));
+                browserPool.execute(new ReflectXssChecker(url, xssArrayList, xssContainer));
             }
         });
 
-        storedXSSUrlContainer = new XssStoredContainer();
-        storedXSSUrlContainer.setCallback(new XssContainerCallback() {
+        potentialStoredXSSUrlContainer = new XssStoredContainer();
+        potentialStoredXSSUrlContainer.setCallback(new XssContainerCallback() {
             @Override
             public void onLinkAdded(XssStored xssStored) {
-                browserPool.execute(new StoredXssChecker(xssStored.url, xssStored.formNumber, xssArrayList));
+                browserPool.execute(new StoredXssChecker(xssStored.url, xssStored.formNumber, xssArrayList, xssContainer));
             }
         });
 
 
         for (String url:linkContainer)
-            browserPool.execute(new XssPreparer(url, linkContainer, reflectXSSUrlContainer, storedXSSUrlContainer));
+            browserPool.execute(new XssPreparer(url, linkContainer, potentialReflectXSSUrlContainer, potentialStoredXSSUrlContainer));
 
     }
 
@@ -141,6 +149,7 @@ public class Engine {
     public interface EngineListener {
         public void onCreateMapEnds();
         public void onXssPrepareEnds();
+        public void onXssAdded(XssStruct xssStruct);
     }
 
 

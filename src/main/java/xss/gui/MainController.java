@@ -13,6 +13,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 import xss.Engine;
 import xss.FileReader;
+import xss.LinkContainer.XssContainer;
+import xss.LinkContainer.XssStruct;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -24,11 +26,13 @@ import java.util.regex.Pattern;
 /**
  * Created by popka on 17.04.15.
  */
-public class MainController implements Engine.EngineListener, Initializable{
+public class MainController implements Engine.EngineListener{
 
     private Scene scene;
     Engine engine;
     Timeline timer;
+
+    int xssCount = 0;
 
     Button startBtn;
     Button cancelBtn;
@@ -200,14 +204,20 @@ public class MainController implements Engine.EngineListener, Initializable{
         engine.stopAnalyse();
     }
 
+    @Override
+    public void onXssAdded(XssStruct xssStruct) {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                xssCount++;
+                xssCountLabel.setText("Уже найдено:  " + xssCount);
+            }
+        });
+    }
+
     private void switchToXSSMode() {
         xssCountLabel.setVisible(true);
         stateLabel.setText("Ищем XSS...");
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
     }
 
     private class Starter implements Runnable {

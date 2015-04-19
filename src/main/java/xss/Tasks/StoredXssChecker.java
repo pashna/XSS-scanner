@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
+import xss.LinkContainer.XssContainer;
+import xss.LinkContainer.XssStruct;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,11 +41,13 @@ public class StoredXssChecker extends BrowserRunnable {
     private String SUBMIT_FORM = "document.forms[" + FORM_NUMBER_TO_REPLACE +"].querySelector(\"[type=submit]\").click()";
 
     private ArrayList<String> xssArrayList;
+    private XssContainer xssContainer;
 
-    public StoredXssChecker(String url, int formNumber, ArrayList<String> xssArrayList) {
+    public StoredXssChecker(String url, int formNumber, ArrayList<String> xssArrayList, XssContainer xssContainer) {
         this.url = url;
         this.formNumber = formNumber;
         this.xssArrayList = xssArrayList;
+        this.xssContainer = xssContainer;
         SUBMIT_FORM = SUBMIT_FORM.replace(FORM_NUMBER_TO_REPLACE, formNumber + "");
     }
 
@@ -60,6 +64,9 @@ public class StoredXssChecker extends BrowserRunnable {
 
             getWebDriver().manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS); // Ждем загрузки
             if (wasScriptExecuted()) {
+                synchronized (xssContainer) {
+                    xssContainer.add(new XssStruct(url, XssStruct.STORED, formNumber));
+                }
                 System.out.println("XSS STORED WAS FOUND" + "   " + xss);
                 break;
             }

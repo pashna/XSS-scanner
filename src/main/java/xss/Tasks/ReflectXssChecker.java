@@ -2,6 +2,8 @@ package xss.Tasks;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriverException;
+import xss.LinkContainer.XssContainer;
+import xss.LinkContainer.XssStruct;
 
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
@@ -12,10 +14,12 @@ import java.util.concurrent.TimeUnit;
 public class ReflectXssChecker extends BrowserRunnable{
     private String url;
     private ArrayList<String> xssArrayList;
+    private XssContainer xssContainer;
 
-    public ReflectXssChecker(String url, ArrayList<String> xssArrayList) {
+    public ReflectXssChecker(String url, ArrayList<String> xssArrayList, XssContainer xssContainer) {
         this.url = url;
         this.xssArrayList = xssArrayList;
+        this.xssContainer = xssContainer;
     }
 
     @Override
@@ -28,6 +32,9 @@ public class ReflectXssChecker extends BrowserRunnable{
             getWebDriver().navigate().to(urlWithXss);
             getWebDriver().manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS); // Ждем загрузки
             if (wasScriptExecuted()) {
+                synchronized (xssContainer) {
+                    xssContainer.add(new XssStruct(xss, XssStruct.REFLECTED));
+                }
                 System.out.println("МЫ НАШЛИ XSS!!! " + xss + "  по урлу " + url);
             }
 

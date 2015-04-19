@@ -1,5 +1,8 @@
 package xss;
 
+import xss.LinkContainer.XssContainer;
+import xss.LinkContainer.XssStruct;
+
 /**
  * Created by popka on 02.04.15.
  */
@@ -31,5 +34,11 @@ public class Starter implements Engine.EngineListener{
     public void onXssPrepareEnds() {
         System.out.println("XssPreparedEnds");
     }
+
+    @Override
+    public void onXssAdded(XssStruct xssStruct) {
+
+    }
+
 
 }

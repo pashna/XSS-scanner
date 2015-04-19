@@ -11,14 +11,14 @@
 <?import javafx.scene.text.*?>
 <?import xss.gui.NumberSpinner?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="463.0000999999975" prefWidth="290.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="xss.gui.MainController">
+<AnchorPane id="AnchorPane" maxHeight="464" maxWidth="290" minHeight="464" minWidth="290" prefHeight="463.0000999999975" prefWidth="290.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="xss.gui.MainController">
   <children>
     <Label layoutX="50.0" layoutY="17.0" prefWidth="43.0" styleClass="label-bright" text="URL:">
       <stylesheets>
         <URL value="@style.css" />
       </stylesheets>
     </Label>
-        <NumberSpinner id="nBrowsers" layoutX="110.0" layoutY="212.0" prefWidth="70.0" prefHeight="25.0"/>
+    <NumberSpinner id="nBrowsers" layoutX="110.0" layoutY="212.0" prefWidth="70.0" prefHeight="25.0"/>
     <TextField id="url_textfield" focusTraversable="false" layoutX="41.0" layoutY="34.0" prefHeight="34.0" prefWidth="200.0" text="http://" />
     <Button id="startBtn" layoutX="95.0" layoutY="408.0" mnemonicParsing="false" onAction="#onClickStart" prefWidth="101.0" text="Начать">
       <font>
@@ -68,7 +68,7 @@
             <Image url="@../loading_dog.gif" />
           </image>
         </ImageView>
-        <Label id="xssCountLabel" layoutX="71.0" layoutY="237.0" prefWidth="116.0" text="Уже найдено: 0" textFill="WHITE" visible="false">
+        <Label id="xssCountLabel" layoutX="37.0" layoutY="237.0" prefWidth="187.0" text="Уже найдено:  0" textFill="WHITE" visible="false" textAlignment="CENTER">
           <font>
             <Font size="14.0" />
           </font>
