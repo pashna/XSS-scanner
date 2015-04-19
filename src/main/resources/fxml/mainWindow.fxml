@@ -11,7 +11,7 @@
 <?import javafx.scene.text.*?>
 <?import xss.gui.NumberSpinner?>
 
-<AnchorPane id="AnchorPane" maxHeight="464" maxWidth="290" minHeight="464" minWidth="290" prefHeight="463.0000999999975" prefWidth="290.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="xss.gui.MainController">
+<AnchorPane id="AnchorPane" maxHeight="464.0" maxWidth="290.0" minHeight="464.0" minWidth="290.0" prefHeight="463.0000999999975" prefWidth="290.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="xss.gui.MainController">
   <children>
     <Label layoutX="50.0" layoutY="17.0" prefWidth="43.0" styleClass="label-bright" text="URL:">
       <stylesheets>
@@ -68,7 +68,7 @@
             <Image url="@../loading_dog.gif" />
           </image>
         </ImageView>
-        <Label id="xssCountLabel" layoutX="37.0" layoutY="237.0" prefWidth="187.0" text="Уже найдено:  0" textFill="WHITE" visible="false" textAlignment="CENTER">
+        <Label id="xssCountLabel" alignment="CENTER" layoutX="37.0" layoutY="237.0" prefWidth="187.0" text="Уже найдено:  0" textAlignment="CENTER" textFill="WHITE" visible="false">
           <font>
             <Font size="14.0" />
           </font>

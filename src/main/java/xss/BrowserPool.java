@@ -130,7 +130,7 @@ public class BrowserPool {
     public void stop() {
         for (int i=0; i<nBrowsers; i++) {
             browsers[i].getWebDriver().close();
-            browsers[i].stop();
+            //browsers[i].stop();
         }
         queue.clear();
         countOfRunningThreads.set(0);
