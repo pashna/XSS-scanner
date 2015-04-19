@@ -18,7 +18,7 @@
         <URL value="@style.css" />
       </stylesheets>
     </Label>
-    <NumberSpinner id="nBrowsers" layoutX="110.0" layoutY="212.0" prefWidth="70.0" prefHeight="25.0"/>
+        <NumberSpinner id="nBrowsers" layoutX="110.0" layoutY="212.0" prefWidth="70.0" prefHeight="25.0"/>
     <TextField id="url_textfield" focusTraversable="false" layoutX="41.0" layoutY="34.0" prefHeight="34.0" prefWidth="200.0" text="http://" />
     <Button id="startBtn" layoutX="95.0" layoutY="408.0" mnemonicParsing="false" onAction="#onClickStart" prefWidth="101.0" text="Начать">
       <font>
@@ -58,21 +58,22 @@
     </Label>
     <AnchorPane id="stateLayout" layoutX="17.0" layoutY="7.0" opacity="1.0" prefHeight="390.0" prefWidth="257.0" styleClass="in_workAnchor" visible="false">
       <children>
-        <Label id="stateLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="32.0" layoutY="164.0" mnemonicParsing="false" mouseTransparent="false" pickOnBounds="false" prefHeight="51.0" prefWidth="195.0" style="" text="Собраем карту сайта..." textAlignment="CENTER" textFill="WHITE" wrapText="false">
+        <Label id="stateLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="32.0" layoutY="174.0" mnemonicParsing="false" mouseTransparent="false" pickOnBounds="false" prefHeight="51.0" prefWidth="195.0" style="" text="Собраем карту сайта..." textAlignment="CENTER" textFill="WHITE" wrapText="false">
           <font>
             <Font size="15.0" />
           </font>
         </Label>
-        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="29.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="29.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
           <image>
             <Image url="@../loading_dog.gif" />
           </image>
         </ImageView>
-        <Label id="xssCountLabel" layoutX="71.0" layoutY="227.0" prefWidth="116.0" text="Уже найдено: 0" textFill="WHITE" visible="false">
+        <Label id="xssCountLabel" layoutX="71.0" layoutY="237.0" prefWidth="116.0" text="Уже найдено: 0" textFill="WHITE" visible="false">
           <font>
             <Font size="14.0" />
           </font>
         </Label>
+        <Label id="timer" alignment="CENTER" contentDisplay="CENTER" layoutX="68.0" layoutY="24.0" prefWidth="124.0" text="" textFill="WHITE" />
       </children>
     </AnchorPane>
   </children>

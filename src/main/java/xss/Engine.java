@@ -35,6 +35,7 @@ public class Engine {
     // Конструктор без авторизации
     public Engine(String url, int nBrowser) {
         this.url = url;
+        linkContainer = new LinkContainer();
         browserPool = new BrowserPool(nBrowser);
         browserPool.execute(new Opener(url));
     }
@@ -43,6 +44,7 @@ public class Engine {
     public Engine(String url, int nBrowser, int sec) {
         this.url = url;
         this.nBrowser = nBrowser;
+        linkContainer = new LinkContainer();
         auth(sec);
     }
 
@@ -74,7 +76,6 @@ public class Engine {
     Создает "карту сайта"
      */
     public void createMapOfSite(){
-        linkContainer = new LinkContainer();
 
         linkContainer.setCallback(new LinkContainer.LinkContainerCallback() { // Срабатывает, при добавлении в linkContainer записи
             @Override
@@ -131,6 +132,10 @@ public class Engine {
         for (String url:linkContainer)
             browserPool.execute(new XssPreparer(url, linkContainer, reflectXSSUrlContainer, storedXSSUrlContainer));
 
+    }
+
+    public void addUrlToAnalyse(String url) {
+        linkContainer.add(url);
     }
 
     public interface EngineListener {

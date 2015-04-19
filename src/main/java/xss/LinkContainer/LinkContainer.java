@@ -17,7 +17,8 @@ public class LinkContainer extends LinkedHashSet<String> {
         url = url.toLowerCase();
         boolean wasAdded = super.add(url);
         if (wasAdded)
-            callback.onLinkAdded(url);
+            if (callback != null)
+                callback.onLinkAdded(url);
         return wasAdded;
     }
 
