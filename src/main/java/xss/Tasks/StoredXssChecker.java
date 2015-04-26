@@ -65,7 +65,7 @@ public class StoredXssChecker extends BrowserRunnable {
             getWebDriver().manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS); // Ждем загрузки
             if (wasScriptExecuted()) {
                 synchronized (xssContainer) {
-                    xssContainer.add(new XssStruct(url, XssStruct.STORED, formNumber));
+                    xssContainer.add(new XssStruct(url, xss, XssStruct.STORED, formNumber));
                 }
                 System.out.println("XSS STORED WAS FOUND" + "   " + xss);
                 break;

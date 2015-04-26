@@ -6,6 +6,7 @@ import xss.Tasks.*;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import xss.report.Reporter;
 
 import java.util.ArrayList;
 import java.util.Set;
@@ -140,6 +141,11 @@ public class Engine {
         for (String url:linkContainer)
             browserPool.execute(new XssPreparer(url, linkContainer, potentialReflectXSSUrlContainer, potentialStoredXSSUrlContainer));
 
+    }
+
+    public void generateReport() {
+        Reporter reporter = new Reporter(xssContainer);
+        reporter.generateReport(url, "22:22:22");
     }
 
     public void addUrlToAnalyse(String url) {

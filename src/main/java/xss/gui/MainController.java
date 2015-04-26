@@ -201,11 +201,13 @@ public class MainController implements Engine.EngineListener{
                 showStartBtn();
             }
         });
+        engine.generateReport();
         engine.stopAnalyse();
     }
 
     @Override
     public void onXssAdded(XssStruct xssStruct) {
+        System.out.println("МЫ НАШЛИ XSS!!! " + xssStruct + "  по урлу " + url);
         Platform.runLater(new Runnable() {
             @Override
             public void run() {

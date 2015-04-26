@@ -7,15 +7,17 @@ public class XssStruct {
     static public int REFLECTED = 1;
     static public int STORED = 2;
 
-    private String url;
-    private int form;
-    private int type;
+    public String url;
+    public String xss;
+    public int form;
+    public int type;
 
-    public XssStruct(String url, int type) {
-        this(url, type, -1);
+    public XssStruct(String url, String xss, int type) {
+        this(url, xss, type, -1);
     }
 
-    public XssStruct(String url, int type, int form) {
+    public XssStruct(String url, String xss, int type, int form) {
+        this.xss = xss;
         this.url = url;
         this.form = form;
         this.type = type;

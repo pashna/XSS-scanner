@@ -33,9 +33,8 @@ public class ReflectXssChecker extends BrowserRunnable{
             getWebDriver().manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS); // Ждем загрузки
             if (wasScriptExecuted()) {
                 synchronized (xssContainer) {
-                    xssContainer.add(new XssStruct(xss, XssStruct.REFLECTED));
+                    xssContainer.add(new XssStruct(url, xss, XssStruct.REFLECTED));
                 }
-                System.out.println("МЫ НАШЛИ XSS!!! " + xss + "  по урлу " + url);
             }
 
         }
