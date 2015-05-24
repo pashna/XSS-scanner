@@ -195,14 +195,15 @@ public class MainController implements Engine.EngineListener{
     @Override
     public void onXssPrepareEnds() {
         System.out.println("AnalyseEnds");
+        engine.generateReport(timerLabel.getText());
+        engine.stopAnalyse();
+
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
                 showStartBtn();
             }
         });
-        engine.generateReport();
-        engine.stopAnalyse();
     }
 
     @Override

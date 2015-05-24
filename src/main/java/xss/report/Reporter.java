@@ -2,12 +2,15 @@ package xss.report;
 
 import xss.LinkContainer.XssContainer;
 import xss.LinkContainer.XssStruct;
+import xss.Tasks.XssPreparer;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.text.DateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by popka on 26.04.15.
@@ -27,53 +30,73 @@ public class Reporter {
 
     private String header = "<!DOCTYPE html>\n" +
             "<html lang=\"en\" class=\"no-js\">\n" +
-            "\t<head>\n" +
-            "\t\t<meta charset=\"UTF-8\" />\n" +
-            "\t\t<title>XSS-Scanner Отчет</title>\n" +
-            "\t\t<link rel=\"shortcut icon\" href=\"../favicon.ico\">\n" +
-            "\t\t<link rel=\"stylesheet\" type=\"text/css\" href=\"css/demo.css\" />\n" +
-            "\t\t<link rel=\"stylesheet\" type=\"text/css\" href=\"css/component.css\" />\n" +
-            "\t</head>\n" +
-            "\t<body>\n" +
-            "\t\t<div class=\"container\">\n" +
-            "\t\t\t<header>\n" +
-            "\t\t\t\t<h1> <em>XSS-Scanner</em>\n" +
-            "\t\t\t\t</h1>\t\n" +
-            "\t\t\t</header>\n" +
-            "\t\t\t<div class=\"component\">\n" +
-            "\t\t\t\t<div class=\"reportInfo\">\n" +
-            "\t\t\t\t\t<h2>Отчет</h2>\n" +
-            "\t\t\t\t\t<p>Проверка url <a href=\""+URL+"\">"+URL+"</a> от " + DATE +"</p>\n" +
-            "\t\t\t\t\t<p>Продолжительность проверки "+DURATION+"</p>\n" +
-            "\t\t\t\t\t<p>Обнаружено <B>"+COUNT+"</B> уязвимостей</p>\n" +
-            "\t\t\t\t</div>" +
-            "\t\t\t\t<table>\n" +
-            "\t\t\t\t\t<thead>\n" +
-            "\t\t\t\t\t\t<tr>\n" +
-            "\t\t\t\t\t\t\t<th>Тип уязвимости</th>\n" +
-            "\t\t\t\t\t\t\t<th>Url</th>\n" +
-            "\t\t\t\t\t\t\t<th>Номер формы</th>\n" +
-            "\t\t\t\t\t\t\t<th>XSS</th>\n" +
-            "\t\t\t\t\t\t</tr>\n" +
-            "\t\t\t\t\t</thead>\n" +
-            "\t\t\t\t\t<tbody>";
+            "<head>\n" +
+            "<meta charset=\"UTF-8\" />\n" +
+            "<title>XSS-Scanner Отчет</title>\n" +
+            "<link rel=\"shortcut icon\" href=\"../favicon.ico\">\n" +
+            "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/demo.css\" />\n" +
+            "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/component.css\" />\n" +
+            "</head>\n" +
+            "<body>\n" +
+            "<div class=\"container\">\n" +
+            "<header>\n" +
+            "<h1> <em>XSS-Scanner</em>\n" +
+            "</h1>\n" +
+            "</header>\n" +
+            "<div class=\"component\">\n" +
+            "<div class=\"reportInfo\">\n" +
+            "<h2>Отчет</h2>\n" +
+            "<p>Проверка url <a href=\""+URL+"\">"+URL+"</a> от " + DATE +"</p>\n" +
+            "<p>Продолжительность проверки "+DURATION+"</p>\n" +
+            "<p>Обнаружено <B>"+COUNT+"</B> уязвимостей</p>\n" +
+            "</div>";
 
-    private String tableRow =
+    private String tableRowReflected =
             "<tr>\n" +
-            "\t\t\t\t\t\t<td>"+TYPE+"</td>\n" +
-            "\t\t\t\t\t\t<td>"+URL+"</td>\n" +
-            "\t\t\t\t\t\t<td>"+FORM_NUMBER+"</td>\n" +
-            "\t\t\t\t\t\t<td>"+XSS+"</td>\n" +
-            "\t\t\t\t\t</tr>";
+            "<td>"+TYPE+"</td>\n" +
+            "<td><textarea style=\"margin: 2px; height: 52px; width: 726px;\">"+XSS+"</textarea></td>\n" +
+            "</tr>";
+
+    private String tableHeaderReflected =
+            "<table>\n" +
+            "<thead>\n" +
+            "<tr>\n" +
+            "<th>Тип уязвимости</th>\n" +
+            "<th>Url</th>\n" +
+            "</tr>\n" +
+            "</thead>\n" +
+            "<tbody>";
+
+    private String tableHeaderStored =
+            "<table>\n" +
+            "<thead>\n" +
+            "<tr>\n" +
+            "<th>Тип уязвимости</th>\n" +
+            "<th>Url</th>\n" +
+            "<th>XSS</th>\n" +
+            "<th>Номер формы</th>\n" +
+            "</tr>\n" +
+            "</thead>\n" +
+            "<tbody>";
+
+    private String tableRowStored =
+            "<tr>\n" +
+            "<td>"+TYPE+"</td>\n" +
+            "<td>"+URL+"</td>\n" +
+            "<td><textarea style=\"margin: 2px; height: 94px; width: 329px;\">"+XSS+"</textarea></td>\n" +
+            "<td style=\"text-align:center;\">"+FORM_NUMBER+"</td>\n" +
+            "</tr>";
+
+    private String tableFooter =
+            "</tbody>\n" +
+            "</table>";
 
     private String footer =
-            "\t\t\t\t\t\t</tbody>\n" +
-            "\t\t\t\t</table>" +
             "</div>\n" +
-            "\t\t<script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js\"></script>\n" +
-            "\t\t<script src=\"http://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js\"></script>\n" +
-            "\t\t<script src=\"js/jquery.stickyheader.js\"></script>\n" +
-            "\t</body>\n" +
+            "<script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js\"></script>\n" +
+            "<script src=\"http://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js\"></script>\n" +
+            "<script src=\"js/jquery.stickyheader.js\"></script>\n" +
+            "</body>\n" +
             "</html>";
 
     public Reporter(XssContainer xssContainer) {
@@ -82,9 +105,30 @@ public class Reporter {
 
     public String generateReport(String url, String duration) {
         String html = replaceHeader(url, duration);
+
+        boolean isFirst = true;
         for (XssStruct xssStruct:xssContainer) {
-            html += generateTableRow(xssStruct);
+            if (XssStruct.REFLECTED==xssStruct.type) {
+                if (isFirst)
+                    html += tableHeaderReflected;
+                html += generateTableRow(xssStruct, XssStruct.REFLECTED);
+            }
+            if (!isFirst)
+                html += tableFooter;
         }
+
+        isFirst = true;
+        for (XssStruct xssStruct:xssContainer) {
+            if (XssStruct.STORED==xssStruct.type) {
+                if (isFirst)
+                    html += tableHeaderStored;
+                html += generateTableRow(xssStruct, XssStruct.STORED);
+            }
+            if (!isFirst)
+                html += tableFooter;
+        }
+
+
         html += footer;
         saveFile(html);
         return html;
@@ -92,35 +136,42 @@ public class Reporter {
 
     private String replaceHeader(String url, String duration) {
         header = header.replaceAll(URL, url);
-        header = header.replace(DATE, new Date().toString());
+
+        DateFormat df = DateFormat.getDateInstance(DateFormat.FULL, new Locale("ru"));//new RussianDateFormat());
+        String formattedDate = df.format(new Date());
+        header = header.replace(DATE, formattedDate);
+        
         header = header.replace(DURATION, duration);
         header = header.replace(COUNT, xssContainer.size() + "");
         return header;
     }
 
-    private String generateTableRow(XssStruct xssStruct) {
-        String generatingTableRow = tableRow;
-        generatingTableRow = generatingTableRow.replace(URL, xssStruct.url);
-        String xss = xssStruct.xss;
-
-        xss.replaceAll("<", "&lt");
-        xss.replaceAll("<", "&gt");
-
-        generatingTableRow = generatingTableRow.replace(XSS, xss);
-        if (xssStruct.type == XssStruct.STORED) {
-            generatingTableRow = generatingTableRow.replace(TYPE, "STORED");
-            generatingTableRow = generatingTableRow.replace(FORM_NUMBER, xssStruct.form + "");
+    private String generateTableRow(XssStruct xssStruct, int type) {
+        String generatingTableRow;
+        if (type == XssStruct.REFLECTED) {
+            generatingTableRow = tableRowReflected;
+            generatingTableRow = generatingTableRow.replace(XSS, xssStruct.url.replace(XssPreparer.INPUT_VALUE, xssStruct.xss));
+            generatingTableRow = generatingTableRow.replace(TYPE, "REFLECTED");
         }
         else {
-            generatingTableRow = generatingTableRow.replace(TYPE, "REFLECTED");
-            generatingTableRow = generatingTableRow.replace(FORM_NUMBER, "");
+            generatingTableRow = tableRowStored;
+            generatingTableRow = generatingTableRow.replace(XSS, xssStruct.xss);
+            generatingTableRow = generatingTableRow.replace(TYPE, "STORED");
+            generatingTableRow = generatingTableRow.replace(URL, xssStruct.url);
+            generatingTableRow = generatingTableRow.replace(FORM_NUMBER, xssStruct.form+"");
         }
+
 
         return generatingTableRow;
     }
 
+
+
     private void saveFile(String text) {
-        String filePath = "/home/popka/Diplom/report/StickyTableHeaders/" + new Date().toString() + ".html";
+        DateFormat df = DateFormat.getDateInstance(DateFormat.FULL, new Locale("ru"));//new RussianDateFormat());
+        String formattedDate = df.format(new Date());
+
+        String filePath = "/home/popka/Diplom/report/StickyTableHeaders/" + formattedDate + ".html";
         File f = new File(filePath);
 
         try {

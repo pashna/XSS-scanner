@@ -15,6 +15,7 @@ public class FileReader {
     public static final int HIGH_LEVEL = 2;
     public static final int TEST = 3;
 
+
     public final String lowLevel = "xssLow";
     public final String mediumLevel = "xssMedium";
     public final String highLevel = "xssHigh";

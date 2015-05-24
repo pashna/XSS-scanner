@@ -143,9 +143,9 @@ public class Engine {
 
     }
 
-    public void generateReport() {
+    public void generateReport(String time) {
         Reporter reporter = new Reporter(xssContainer);
-        reporter.generateReport(url, "22:22:22");
+        reporter.generateReport(url, time);
     }
 
     public void addUrlToAnalyse(String url) {

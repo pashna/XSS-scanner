@@ -25,7 +25,6 @@
         <Font size="17.0" fx:id="x1" />
       </font>
     </Button>
-    <Button id="cancelBtn" font="$x1" layoutX="103.0" layoutY="404.0" mnemonicParsing="false" onAction="#onCancelClick" prefWidth="101.0" text="Отмена" visible="false" />
     <CheckBox id="checkAuth" layoutX="83.0" layoutY="354.0" mnemonicParsing="false" prefWidth="116.0" styleClass="white-text" text="Авторизация" />
     <ComboBox id="chooseDepth" layoutX="76.0" layoutY="286.0" style="" value="Средний">
       <items>
@@ -56,7 +55,7 @@
         <Font size="11.0" />
       </font>
     </Label>
-    <AnchorPane id="stateLayout" layoutX="17.0" layoutY="7.0" opacity="1.0" prefHeight="390.0" prefWidth="257.0" styleClass="in_workAnchor" visible="false">
+    <AnchorPane id="stateLayout" layoutX="17.0" layoutY="7.0" opacity="1.0" prefHeight="443.0" prefWidth="257.0" styleClass="in_workAnchor" visible="false">
       <children>
         <Label id="stateLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="32.0" layoutY="174.0" mnemonicParsing="false" mouseTransparent="false" pickOnBounds="false" prefHeight="51.0" prefWidth="195.0" style="" text="Собраем карту сайта..." textAlignment="CENTER" textFill="WHITE" wrapText="false">
           <font>
@@ -74,6 +73,7 @@
           </font>
         </Label>
         <Label id="timer" alignment="CENTER" contentDisplay="CENTER" layoutX="68.0" layoutY="24.0" prefWidth="124.0" text="" textFill="WHITE" />
+        <Button id="cancelBtn" font="$x1" layoutX="78.0" layoutY="402.0" mnemonicParsing="false" onAction="#onCancelClick" prefWidth="101.0" text="Отмена" />
       </children>
     </AnchorPane>
   </children>
