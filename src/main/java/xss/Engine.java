@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import xss.report.Reporter;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -33,19 +34,28 @@ public class Engine {
     }
 
     // Конструктор без авторизации
-    public Engine(String url, int nBrowser) {
+    public Engine(String url, int nBrowser, EngineListener engineListener) {
         this.url = url;
         linkContainer = new LinkContainer();
         browserPool = new BrowserPool(nBrowser);
         browserPool.execute(new Opener(url));
+
+        this.engineListener = engineListener;
+        if (engineListener!=null)
+            engineListener.onBrowsersReady();
     }
 
     // Конструктор с авторизацией
-    public Engine(String url, int nBrowser, int sec) {
+    public Engine(String url, int nBrowser, EngineListener engineListener, int sec) {
         this.url = url;
         this.nBrowser = nBrowser;
         linkContainer = new LinkContainer();
         auth(sec);
+        engineListener.onBrowsersReady();
+
+        this.engineListener = engineListener;
+        if (engineListener!=null)
+            engineListener.onBrowsersReady();
     }
 
     // авторизация
@@ -143,9 +153,10 @@ public class Engine {
 
     }
 
-    public void generateReport(String time) {
+    public void generateReport(File directory, String time) {
+
         Reporter reporter = new Reporter(xssContainer);
-        reporter.generateReport(url, time);
+        reporter.generateReport(url, directory, time);
     }
 
     public void addUrlToAnalyse(String url) {
@@ -155,6 +166,7 @@ public class Engine {
     public interface EngineListener {
         public void onCreateMapEnds();
         public void onXssPrepareEnds();
+        public void onBrowsersReady();
         public void onXssAdded(XssStruct xssStruct);
     }
 

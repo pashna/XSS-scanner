@@ -14,7 +14,7 @@ public class Starter implements Engine.EngineListener{
     private Engine engine;
 
     public void start() {
-        engine = new Engine(url, nBrowser);
+        engine = new Engine(url, nBrowser, this);
         engine.setEngineListener(this);
         engine.createMapOfSite();
 
@@ -33,6 +33,10 @@ public class Starter implements Engine.EngineListener{
     @Override
     public void onXssPrepareEnds() {
         System.out.println("XssPreparedEnds");
+    }
+
+    @Override
+    public void onBrowsersReady() {
     }
 
     @Override

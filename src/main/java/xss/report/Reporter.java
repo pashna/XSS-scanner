@@ -4,11 +4,9 @@ import xss.LinkContainer.XssContainer;
 import xss.LinkContainer.XssStruct;
 import xss.Tasks.XssPreparer;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
@@ -27,6 +25,8 @@ public class Reporter {
     private final String TYPE = "TYPE";
     private final String FORM_NUMBER = "FORM_NUMBER";
     private final String XSS = "XSS";
+
+    private final String REPORT = "report";
 
     private String header = "<!DOCTYPE html>\n" +
             "<html lang=\"en\" class=\"no-js\">\n" +
@@ -103,7 +103,9 @@ public class Reporter {
         this.xssContainer = xssContainer;
     }
 
-    public String generateReport(String url, String duration) {
+    public void generateReport(String url, File directory, String duration) {
+
+
         String html = replaceHeader(url, duration);
 
         boolean isFirst = true;
@@ -130,17 +132,19 @@ public class Reporter {
 
 
         html += footer;
-        saveFile(html);
-        return html;
+
+        copyJsCssToDirectory(directory);
+        saveFile(html, directory);
+
     }
 
     private String replaceHeader(String url, String duration) {
         header = header.replaceAll(URL, url);
 
-        DateFormat df = DateFormat.getDateInstance(DateFormat.FULL, new Locale("ru"));//new RussianDateFormat());
-        String formattedDate = df.format(new Date());
-        header = header.replace(DATE, formattedDate);
-        
+
+        DateFormat dateFormat = new SimpleDateFormat("dd MMMM YYYY", new RussianDateFormatSymbols() );
+        header = header.replace(DATE, dateFormat.format( new Date() ));
+
         header = header.replace(DURATION, duration);
         header = header.replace(COUNT, xssContainer.size() + "");
         return header;
@@ -167,18 +171,41 @@ public class Reporter {
 
 
 
-    private void saveFile(String text) {
-        DateFormat df = DateFormat.getDateInstance(DateFormat.FULL, new Locale("ru"));//new RussianDateFormat());
-        String formattedDate = df.format(new Date());
+    private void saveFile(String text, File directory) {
+        DateFormat dateFormat = new SimpleDateFormat("HH:mm dd MMMM YYYY", new RussianDateFormatSymbols() );
+        String formattedDate = dateFormat.format( new Date() );
 
-        String filePath = "/home/popka/Diplom/report/StickyTableHeaders/" + formattedDate + ".html";
-        File f = new File(filePath);
+        if (directory.isDirectory()) {
+            String filePath = directory.getAbsolutePath().toString() +File.separator+ formattedDate + ".html";
+            File reportHTML = new File(filePath);
 
-        try {
-            PrintWriter writer = new PrintWriter(f, "UTF-8");
-            writer.println(text);
-            writer.close();
-        } catch (FileNotFoundException|UnsupportedEncodingException e) {}
+            try {
+                PrintWriter writer = new PrintWriter(reportHTML, "UTF-8");
+                writer.println(text);
+                writer.close();
+            } catch (FileNotFoundException | UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
 
     }
+
+    private void copyJsCssToDirectory(File directory) {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File reportStyle = new File(classLoader.getResource(REPORT).getFile());
+
+
+
+        DirectoryCopier directoryCopier = new DirectoryCopier();
+
+        try{
+            directoryCopier.copyFolder(reportStyle, directory);
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+
+    }
+
 }
+

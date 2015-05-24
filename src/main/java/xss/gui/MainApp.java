@@ -42,6 +42,8 @@ public class MainApp extends Application {
 
         stage.show();
 
+        myController.initGraphic();
+
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             public void handle(WindowEvent we) {
                 System.exit(0);
