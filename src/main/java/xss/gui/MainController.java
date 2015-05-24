@@ -41,6 +41,8 @@ public class MainController implements Engine.EngineListener{
     Label xssCountLabel;
     Label directoryError;
 
+    private final String STARTING = "Запускаемся...";
+
     private final int ALL_SITE = 1;
     private final int ONE_PAGE = 2;
 
@@ -133,7 +135,13 @@ public class MainController implements Engine.EngineListener{
         Thread thread = new Thread(starter);
         thread.start();
 
+        stateLabel.setText(STARTING);
+        xssCountLabel.setVisible(false);
+        xssCountLabel.setText("Уже найдено:  " + xssCount);
+
         hideMainLayout();
+
+
 
     }
 

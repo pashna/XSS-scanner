@@ -8,7 +8,6 @@ import java.io.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 /**
  * Created by popka on 26.04.15.
@@ -26,7 +25,7 @@ public class Reporter {
     private final String FORM_NUMBER = "FORM_NUMBER";
     private final String XSS = "XSS";
 
-    private final String REPORT = "report";
+    private final String REPORT = "reportStyle";
 
     private String header = "<!DOCTYPE html>\n" +
             "<html lang=\"en\" class=\"no-js\">\n" +
@@ -34,8 +33,8 @@ public class Reporter {
             "<meta charset=\"UTF-8\" />\n" +
             "<title>XSS-Scanner Отчет</title>\n" +
             "<link rel=\"shortcut icon\" href=\"../favicon.ico\">\n" +
-            "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/demo.css\" />\n" +
-            "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/component.css\" />\n" +
+            "<link rel=\"stylesheet\" type=\"text/css\" href=\"xssScanerReportStyle/css/demo.css\" />\n" +
+            "<link rel=\"stylesheet\" type=\"text/css\" href=\"xssScanerReportStyle/css/component.css\" />\n" +
             "</head>\n" +
             "<body>\n" +
             "<div class=\"container\">\n" +
@@ -95,7 +94,7 @@ public class Reporter {
             "</div>\n" +
             "<script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js\"></script>\n" +
             "<script src=\"http://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js\"></script>\n" +
-            "<script src=\"js/jquery.stickyheader.js\"></script>\n" +
+            "<script src=\"xssScanerReportStyle/js/jquery.stickyheader.js\"></script>\n" +
             "</body>\n" +
             "</html>";
 
@@ -111,24 +110,28 @@ public class Reporter {
         boolean isFirst = true;
         for (XssStruct xssStruct:xssContainer) {
             if (XssStruct.REFLECTED==xssStruct.type) {
-                if (isFirst)
+                if (isFirst) {
                     html += tableHeaderReflected;
+                    isFirst = false;
+                }
                 html += generateTableRow(xssStruct, XssStruct.REFLECTED);
             }
-            if (!isFirst)
-                html += tableFooter;
         }
+        if (!isFirst)
+            html += tableFooter;
 
         isFirst = true;
         for (XssStruct xssStruct:xssContainer) {
             if (XssStruct.STORED==xssStruct.type) {
-                if (isFirst)
+                if (isFirst) {
                     html += tableHeaderStored;
+                    isFirst = false;
+                }
                 html += generateTableRow(xssStruct, XssStruct.STORED);
             }
-            if (!isFirst)
-                html += tableFooter;
         }
+        if (!isFirst)
+            html += tableFooter;
 
 
         html += footer;

