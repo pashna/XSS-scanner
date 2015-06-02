@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<?import xss.gui.NumberSpinner?>
+<AnchorPane id="AnchorPane" maxHeight="553.0" maxWidth="290.0" minHeight="464.0" minWidth="290.0" prefHeight="533.0000999999975" prefWidth="290.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="xss.gui.MainController">
+  <children>
+    <Button id="selectDirectory" layoutX="106.0" layoutY="360.0" mnemonicParsing="false" onAction="#selectDirectory" prefWidth="79.0" text="Обзор">
+      <font>
+        <Font size="17.0" fx:id="x1" />
+      </font>
+    </Button>
+    <Label layoutX="50.0" layoutY="17.0" prefWidth="43.0" styleClass="label-bright" text="URL:">
+      <stylesheets>
+        <URL value="@style.css" />
+      </stylesheets>
+    </Label>
+    <NumberSpinner id="nBrowsers" layoutX="110.0" layoutY="212.0" prefWidth="70.0" prefHeight="25.0"/>
+    <TextField id="url_textfield" focusTraversable="false" layoutX="41.0" layoutY="34.0" prefHeight="34.0" prefWidth="200.0" text="http://" />
+    <Button id="startBtn" font="$x1" layoutX="69.0" layoutY="474.0" mnemonicParsing="false" onAction="#onClickStart" prefWidth="145.0" text="Начать" />
+    <CheckBox id="checkAuth" layoutX="83.0" layoutY="425.0" mnemonicParsing="false" prefWidth="116.0" styleClass="white-text" text="Авторизация" />
+    <Label layoutX="54.0" layoutY="336.0" prefWidth="138.0" styleClass="label-bright" text="Сохранить отчет в:" />
+    <ComboBox id="chooseDepth" layoutX="76.0" layoutY="282.0" style="" value="Средний">
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="Поверхностный" />
+          <String fx:value="Средний" />
+          <String fx:value="Глубокий" />
+        </FXCollections>
+      </items>
+    </ComboBox>
+    <RadioButton id="radioSite" layoutX="27.0" layoutY="133.0" mnemonicParsing="false" selected="true" styleClass="white-text" text="Весь сайт">
+      <toggleGroup>
+        <ToggleGroup fx:id="radioGroup1" />
+      </toggleGroup>
+    </RadioButton>
+    <RadioButton id="radioPage" layoutX="130.0" layoutY="133.0" mnemonicParsing="false" prefWidth="137.0001220703125" styleClass="white-text" text="Одна страничка" toggleGroup="$radioGroup1" />
+    <Label layoutX="54.0" layoutY="260.0" styleClass="label-bright" text="Глубина поиска:" />
+    <Label layoutX="81.0" layoutY="69.0" prefWidth="200.0" styleClass="label-bright-small" text="Например: http://www.yandex.ru/">
+      <font>
+        <Font size="10.0" />
+      </font>
+    </Label>
+    <Label layoutX="55.0" layoutY="109.0" styleClass="label-bright" text="Количество страниц:" />
+    <Label layoutX="54.0" layoutY="189.0" styleClass="label-bright" text="" />
+    <Label layoutX="54.0" layoutY="188.0" prefWidth="162.0" styleClass="label-bright" text="Количество браузеров:" />
+    <Label id="directoryError" layoutX="187.0" layoutY="337.0" prefWidth="79.0" text="Не выбрано" visible="false">
+      <font>
+        <Font size="11.0" fx:id="x2" />
+      </font>
+      <textFill>
+        <Color blue="0.000" green="0.239" red="1.000" fx:id="x3" />
+      </textFill>
+    </Label>
+    <Label id="urlError" font="$x2" layoutX="135.0" layoutY="18.0" text="Ошибка ввода URL" textFill="$x3" visible="false" />
+    <AnchorPane id="stateLayout" layoutX="13.0" layoutY="14.0" opacity="1.0" prefHeight="496.0" prefWidth="262.0" styleClass="in_workAnchor" visible="false">
+      <children>
+        <Label id="stateLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="32.0" layoutY="193.0" mnemonicParsing="false" mouseTransparent="false" pickOnBounds="false" prefHeight="51.0" prefWidth="195.0" style="" text="Запускаемся..." textAlignment="CENTER" textFill="WHITE" wrapText="false">
+          <font>
+            <Font size="15.0" />
+          </font>
+        </Label>
+        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="29.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
+          <image>
+            <Image url="@../loading_dog.gif" />
+          </image>
+        </ImageView>
+        <Label id="xssCountLabel" alignment="CENTER" layoutX="37.0" layoutY="237.0" prefWidth="187.0" text="Уже найдено:  0" textAlignment="CENTER" textFill="WHITE" visible="false">
+          <font>
+            <Font size="14.0" />
+          </font>
+        </Label>
+        <Label id="timer" alignment="CENTER" contentDisplay="CENTER" layoutX="68.0" layoutY="24.0" prefWidth="124.0" text="" textFill="WHITE" />
+        <Button id="cancelBtn" font="$x1" layoutX="56.0" layoutY="451.0" mnemonicParsing="false" onAction="#onCancelClick" prefWidth="145.0" text="Отмена" />
+      </children>
+    </AnchorPane>
+  </children>
+  <stylesheets>
+    <URL value="@style.css" />
+  </stylesheets>
+</AnchorPane>

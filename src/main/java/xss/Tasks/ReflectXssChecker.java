@@ -1,6 +1,7 @@
 package xss.Tasks;
 
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriverException;
 import xss.LinkContainer.XssContainer;
 import xss.LinkContainer.XssStruct;
@@ -28,13 +29,16 @@ public class ReflectXssChecker extends BrowserRunnable{
 
         for (String xss : xssArrayList) {
             String urlWithXss = url.replaceAll(XssPreparer.INPUT_VALUE, xss); // Заменяем INPUT_VALUE на XSS
-
-            getWebDriver().navigate().to(urlWithXss);
-            getWebDriver().manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS); // Ждем загрузки
-            if (wasScriptExecuted()) {
-                synchronized (xssContainer) {
-                    xssContainer.add(new XssStruct(url, xss, XssStruct.REFLECTED));
+            try {
+                getWebDriver().navigate().to(urlWithXss);
+                getWebDriver().manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS); // Ждем загрузки
+                if (wasScriptExecuted()) {
+                    synchronized (xssContainer) {
+                        xssContainer.add(new XssStruct(url, xss, XssStruct.REFLECTED));
+                    }
                 }
+            } catch (TimeoutException e) {
+
             }
 
         }

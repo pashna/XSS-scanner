@@ -1,0 +1,129 @@
+
+#NumberField {
+    -fx-border-width: 1;
+    -fx-border-color: lightgray;
+    -fx-background-insets:1;
+    -fx-border-radius:3 0 0 3;
+    /*    -fx-border-radius:0 0 0 0;*/
+}
+#NumberSpinnerArrow {
+    -fx-fill: gray;
+    -fx-stroke: gray;
+    /*        -fx-effect: innershadow( gaussian , black , 2 , 0.6 , 1 , 1 )*/
+}
+#ButtonsBox {
+    -fx-border-color:lightgray;
+    -fx-border-width: 1 1 1 0;
+    -fx-border-radius: 0 3 3 0;
+    /*    -fx-border-radius: 0 0 0 0;*/
+}
+#SpinnerButtonUp {
+    -fx-background-insets: 0;
+    -fx-background-radius:0 3 0 0;
+    /*    -fx-background-radius:0;*/
+}
+#SpinnerButtonDown {
+    -fx-background-insets: 0;
+    -fx-background-radius:0 0 3 0;
+    /*    -fx-background-radius:0;*/
+}
+
+#AnchorPane {
+    -fx-background-color: "#232423";
+}
+
+.in_workAnchor {
+    -fx-background-color: rgba(0,0,0,0.9);
+    -fx-background-radius: 10px, 10px, 10px, 10px;
+}
+
+.button {
+    -fx-background-color:
+        #0C0A0C,
+        linear-gradient(#50424b 0%, #1f2429 20%, #191d22 100%),
+        linear-gradient(#20262b, #191d22),
+        radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));
+    -fx-background-radius: 5,4,3,5;
+    -fx-background-insets: 0,1,2,0;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-font-family: "Arial";
+    -fx-text-fill: linear-gradient(white, #d0d0d0);
+    -fx-font-size: 12px;
+    -fx-padding: 10 20 10 20;
+}
+
+.button:hover {
+    -fx-background-color:
+        #090a0c,
+        linear-gradient(#45424b 0%, #1f2429 20%, #191d22 100%),
+        linear-gradient(#30262b, #191d22),
+        radial-gradient(center 50% 0%, radius 100%, rgba(150,131,148,0.9), rgba(255,255,255,0));
+    -fx-background-radius: 5,4,3,5;
+    -fx-background-insets: 0,1,2,0;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-font-family: "Arial";
+    -fx-text-fill: linear-gradient(white, #d0d0d0);
+    -fx-font-size: 12px;
+    -fx-padding: 10 20 10 20;
+}
+
+.button:pressed {
+    -fx-padding: 10 15 13 15;
+    -fx-background-insets: 2 0 0 0,2 0 3 0, 2 0 4 0, 2 0 5 0;
+}
+
+.button Text {
+    -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.9) , 1, 0.0 , 0 , 1 );
+}
+
+.label-bright {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+
+.label-bright-small {
+    -fx-font-size: 10pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+
+.white-text {
+    -fx-text-fill: white;
+    -fx-opacity: 0.9;
+}
+
+.radio-button .radio {
+    -fx-border-width: 1px;
+    -fx-border-color: #000;
+    -fx-background-color: white;
+    -fx-background-image: null;
+    -fx-border-radius: 12px;
+    -fx-padding: 4px;
+}
+.radio-button .radio:selected {
+    -fx-background-color: white;
+    -fx-background-image: null;
+}
+.radio-button -radio:armed {
+    -fx-background-color: white;
+    -fx-background-image: null;
+}
+.radio-button -radio:determinate {
+    -fx-background-color: white;
+    -fx-background-image: null;
+}
+.radio-button -radio:indeterminate {
+    -fx-background-color: white;
+    -fx-background-image: null;
+}
+.radio-button .dot {
+    -fx-background-radius: 12px;
+    -fx-padding: 4px;
+}
+
+

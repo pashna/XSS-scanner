@@ -19,9 +19,8 @@ public class FileReader {
     public final String lowLevel = "xssLow";
     public final String mediumLevel = "xssMedium";
     public final String highLevel = "xssHigh";
-    public final String cheatSheet = "xssCheatSheet";
+    public final String cheatSheet = "TEST";
 
-    private int level;
     private ArrayList<String> filenameArrayList = new ArrayList<String>();
 
     public FileReader(int level) {
