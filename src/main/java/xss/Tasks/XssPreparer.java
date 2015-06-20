@@ -75,6 +75,7 @@ public class XssPreparer extends BrowserRunnable {
             getWebDriver().manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS); // Ждем загрузки
 
             clearAllInput();
+/*
 
             if (isPageContainsInputValue()) {// если на страничке после чистки инпутов, есть слово, которое мы ввели (INPUT_VALUE), будем проверять эту страничку
                 if (getWebDriver().getCurrentUrl().equals(currentUrl)) { // Если равен текущему урлу (значит, мы не перешли), стало быть проверяем на StoredXSS
@@ -92,9 +93,11 @@ public class XssPreparer extends BrowserRunnable {
                                 reflectXSSUrlContainer.add(decodedUrl);
                             }
 
-                        /*
+                        */
+/*
                         Пока не оттестировано!
-                         */
+                         *//*
+
                             decodedUrl = decodedUrl.substring(0, decodedUrl.indexOf("?")); // Обрезаем по аргументы и добавляем в карту сайта (вдруг там новые ссылки)
                             synchronized (linkContainer) {
                                 linkContainer.add(decodedUrl);
@@ -104,6 +107,36 @@ public class XssPreparer extends BrowserRunnable {
                     }
                 }
             }
+
+
+*/
+            // =========
+            if (isPageContainsInputValue()) {// если на страничке после чистки инпутов, есть слово, которое мы ввели (INPUT_VALUE), будем проверять эту страничку
+                String decodedUrl = URLDecoder.decode(getWebDriver().getCurrentUrl());
+
+                if (decodedUrl.contains(INPUT_VALUE)) { // Если в списке параметров есть наш ввод - все ок
+                    if (isPageContainsInputValue()) { // если на страничке после чистки инпутов, есть слово, которое мы ввели (INPUT_VALUE), будем проверять эту страничку
+                        System.out.println(currentUrl + "  REFLECT");
+                        synchronized (reflectXSSUrlContainer) {
+                            reflectXSSUrlContainer.add(decodedUrl);
+                        }
+
+                        /*
+                        Пока не оттестировано!
+                         */
+                        decodedUrl = decodedUrl.substring(0, decodedUrl.indexOf("?")); // Обрезаем по аргументы и добавляем в карту сайта (вдруг там новые ссылки)
+                        synchronized (linkContainer) {
+                            linkContainer.add(decodedUrl);
+                        }
+
+                    }
+                } else {
+                    System.out.println(currentUrl + "  STORED");
+                    storedXSSUrlContainer.add(new XssStored(url, i));
+                }
+
+            }
+            //=========
         }
     }
 

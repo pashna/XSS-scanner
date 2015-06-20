@@ -1,5 +1,6 @@
 package xss.Tasks;
 
+import org.openqa.selenium.JavascriptExecutor;
 import xss.LinkContainer.LinkContainer;
 
 import org.openqa.selenium.By;
@@ -82,10 +83,10 @@ public class LinkFinder extends BrowserRunnable {
             if (m.find()) {
                 String expansion = m.group(); // Получаем расширение, чтобы не скачавать файлы типа .doc и т.д.
                 if (isAvailiableExpansion(expansion)) {
-                    return false;
+                    return true;
                 }
             }
-            return true;
+            return false;
         }
         return false;
     }
