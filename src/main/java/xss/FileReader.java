@@ -1,7 +1,6 @@
 package xss;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -52,7 +51,21 @@ public class FileReader {
         ClassLoader classLoader = getClass().getClassLoader();
 
         for (String filename: filenameArrayList) {
-            File file = new File(classLoader.getResource(filename).getFile());
+            InputStream in = classLoader.getResourceAsStream(filename);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+            StringBuilder out = new StringBuilder();
+            String line;
+            try {
+                while ((line = reader.readLine()) != null) {
+                    result.add(line);
+                }
+
+                reader.close();
+            }
+            catch (IOException e) {}
+
+
+            /*File file = new File(classLoader.getResource(filename).getFile());
 
             try {
                 Scanner scanner = new Scanner(file);
@@ -66,7 +79,7 @@ public class FileReader {
 
             } catch (IOException e) {
                 e.printStackTrace();
-            }
+            }*/
         }
 
         return result;

@@ -28,7 +28,7 @@ public class XssPreparer extends BrowserRunnable {
     private final String FORM = "FORM";
 
     private final String TEXT_TO_REPLACE = "TEXT_TO_REPLACE";
-    public static final String INPUT_VALUE = "999999999";
+    public static final String INPUT_VALUE = "aaa99999xzc9999ccc";
     private LinkContainer reflectXSSUrlContainer;
     private XssStoredContainer storedXSSUrlContainer;
     private LinkContainer linkContainer;

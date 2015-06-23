@@ -1,0 +1,43 @@
+<html><head>
+  <SCRIPT src="http://java.com/js/dtjava.js"></SCRIPT>
+<script>
+    function launchApplication(jnlpfile) {
+        dtjava.launch(            {
+                url : 'XSS_Scanner.jnlp'
+            },
+            {
+                javafx : '2.2+'
+            },
+            {}
+        );
+        return false;
+    }
+</script>
+
+<script>
+    function javafxEmbed_XSS_Scanner_id() {
+        dtjava.embed(
+            {
+                id : 'XSS_Scanner_id',
+                url : 'XSS_Scanner.jnlp',
+                placeholder : 'javafx-app-placeholder',
+                width : 600,
+                height : 400
+            },
+            {
+                javafx : '2.2+'
+            },
+            {}
+        );
+    }
+    <!-- Embed FX application into web page once page is loaded -->
+    dtjava.addOnloadCallback(javafxEmbed_XSS_Scanner_id);
+</script>
+
+</head><body>
+<h2>Test page for <b>XSS-Scanner</b></h2>
+  <b>Webstart:</b> <a href='XSS_Scanner.jnlp' onclick="return launchApplication('XSS_Scanner.jnlp');">click to launch this app as webstart</a><br><hr><br>
+
+  <!-- Applet will be inserted here -->
+  <div id='javafx-app-placeholder'></div>
+</body></html>

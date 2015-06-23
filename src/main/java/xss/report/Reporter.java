@@ -1,5 +1,6 @@
 package xss.report;
 
+import org.apache.commons.io.IOUtils;
 import xss.LinkContainer.XssContainer;
 import xss.LinkContainer.XssStruct;
 import xss.Tasks.XssPreparer;
@@ -8,6 +9,8 @@ import java.io.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 /**
  * Created by popka on 26.04.15.
@@ -25,7 +28,7 @@ public class Reporter {
     private final String FORM_NUMBER = "FORM_NUMBER";
     private final String XSS = "XSS";
 
-    private final String REPORT = "reportStyle";
+    private final String REPORT = "reportStyle.zip";
 
     private String header = "<!DOCTYPE html>\n" +
             "<html lang=\"en\" class=\"no-js\">\n" +
@@ -33,8 +36,8 @@ public class Reporter {
             "<meta charset=\"UTF-8\" />\n" +
             "<title>XSS-Scanner Отчет</title>\n" +
             "<link rel=\"shortcut icon\" href=\"../favicon.ico\">\n" +
-            "<link rel=\"stylesheet\" type=\"text/css\" href=\"xssScanerReportStyle/css/demo.css\" />\n" +
-            "<link rel=\"stylesheet\" type=\"text/css\" href=\"xssScanerReportStyle/css/component.css\" />\n" +
+            "<link rel=\"stylesheet\" type=\"text/css\" href=\"reportStyle/xssScanerReportStyle/css/demo.css\" />\n" +
+            "<link rel=\"stylesheet\" type=\"text/css\" href=\"reportStyle/xssScanerReportStyle/css/component.css\" />\n" +
             "</head>\n" +
             "<body>\n" +
             "<div class=\"container\">\n" +
@@ -94,7 +97,7 @@ public class Reporter {
             "</div>\n" +
             "<script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js\"></script>\n" +
             "<script src=\"http://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js\"></script>\n" +
-            "<script src=\"xssScanerReportStyle/js/jquery.stickyheader.js\"></script>\n" +
+            "<script src=\"reportStyle/xssScanerReportStyle/js/jquery.stickyheader.js\"></script>\n" +
             "</body>\n" +
             "</html>";
 
@@ -194,7 +197,7 @@ public class Reporter {
     }
 
     private void copyJsCssToDirectory(File directory) {
-        ClassLoader classLoader = getClass().getClassLoader();
+        /*ClassLoader classLoader = getClass().getClassLoader();
         File reportStyle = new File(classLoader.getResource(REPORT).getFile());
 
 
@@ -206,6 +209,54 @@ public class Reporter {
         }
         catch(IOException e){
             e.printStackTrace();
+        }*/
+
+        InputStream is = getClass().getClassLoader().getResourceAsStream(REPORT);
+        ZipInputStream zis = new ZipInputStream(is);
+        ZipEntry entry;
+
+        try {
+            while ((entry = zis.getNextEntry()) != null) {
+
+                // Create a file on HDD in the destinationPath directory
+                // destinationPath is a "root" folder, where you want to extract your ZIP file
+                File entryFile = new File(directory, entry.getName());
+                if (entry.isDirectory()) {
+
+                    if (entryFile.exists()) {
+                        System.out.print("Directory Already Exist");
+                    } else {
+                        entryFile.mkdirs();
+                    }
+
+                } else {
+
+                    // Make sure all folders exists (they should, but the safer, the better ;-))
+                    if (entryFile.getParentFile() != null && !entryFile.getParentFile().exists()) {
+                        entryFile.getParentFile().mkdirs();
+                    }
+
+                    // Create file on disk...
+                    if (!entryFile.exists()) {
+                        entryFile.createNewFile();
+                    }
+
+                    // and rewrite data from stream
+                    OutputStream os = null;
+                    try {
+                        os = new FileOutputStream(entryFile);
+                        IOUtils.copy(zis, os);
+                    } finally {
+                        IOUtils.closeQuietly(os);
+                    }
+                }
+            }
+        }
+        catch (IOException e) {
+
+        }
+        finally {
+            IOUtils.closeQuietly(zis);
         }
 
     }

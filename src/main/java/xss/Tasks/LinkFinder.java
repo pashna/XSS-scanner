@@ -86,7 +86,7 @@ public class LinkFinder extends BrowserRunnable {
                     return true;
                 }
             }
-            return false;
+            return true;
         }
         return false;
     }
