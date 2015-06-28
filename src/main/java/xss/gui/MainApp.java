@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -33,6 +34,9 @@ public class MainApp extends Application {
         stage.setTitle("XSS-Scanner");
         stage.setScene(scene);
         stage.setResizable(false);
+        stage.getIcons().add(new Image(getClass().getClassLoader().getResourceAsStream("icon.jpg")));
+
+
 
         String path = getClass().getClassLoader().getResource(cssFile).toExternalForm();
         scene.getStylesheets().add(path);
