@@ -178,7 +178,7 @@ public class Reporter {
 
 
     private void saveFile(String text, File directory) {
-        DateFormat dateFormat = new SimpleDateFormat("HH:mm dd MMMM YYYY", new RussianDateFormatSymbols() );
+        DateFormat dateFormat = new SimpleDateFormat("HH.mm dd MMMM YYYY", new RussianDateFormatSymbols() );
         String formattedDate = dateFormat.format( new Date() );
 
         if (directory.isDirectory()) {
