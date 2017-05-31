@@ -1,5 +1,5 @@
 # XSS-scanner
-XSS-Scanner is a **multi-threading** app that works in parallel in several browser windows to save time and improve efficiency.
+XSS-Scanner is a **multi-threading** app with cure **graphical interface** (written with JavaFX) that works in parallel in several browser windows to save time and improve efficiency.
 
 It **emitates** client's activities by walking throught all the links on the web-site, filling all the forms and checking their safety.
 
